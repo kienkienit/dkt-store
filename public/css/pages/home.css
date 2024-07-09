@@ -1,0 +1,16 @@
+.content-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15%;
+} 
+.header-content {
+    display: flex;
+}
+.middle-content {
+    margin-top: 30px;
+    display: flex;
+}
+.right-middle-content {
+    margin-left: 20px;
+    flex: 1;
+}

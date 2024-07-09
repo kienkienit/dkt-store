@@ -1,0 +1,34 @@
+.content-container {
+    margin: 0 15%;
+}
+.go-home {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.go-home a{
+    color: #343a40;
+}
+.go-home a:hover {
+    color: #77ca64;
+    text-decoration: none;
+}
+.go-home p {
+    color: #77ca64;
+    display: inline-block;
+}
+.news-container {
+    padding: 0 10%;
+}
+.news-image {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+.news-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.posted-time {
+    color: #8d8b8b;
+    margin-bottom: 30px;
+}

@@ -1,0 +1,9 @@
+.banner {
+    flex: 1;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.banner img {
+    width: 100%;
+    height: auto;
+}

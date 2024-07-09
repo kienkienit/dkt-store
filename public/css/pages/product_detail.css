@@ -1,0 +1,108 @@
+.content-container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 15%;
+}
+.line {
+    height: 2px;
+    background-color: #666;
+}
+.go-home {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+.go-home a{
+    color: #343a40;
+}
+.go-home a:hover {
+    color: #77ca64;
+    text-decoration: none;
+}
+.go-home p {
+    color: #77ca64;
+    display: inline-block;
+}
+.header-product-detail-container {
+    display: flex;
+}
+.product-image {
+    margin-right: 30px;
+}
+.product-detail > *{
+    margin-bottom: 30px;
+}
+.product-detail > .product-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: #343a40;
+}
+.product-detail > .price {
+    font-size: 25px;
+    font-weight: bold;
+    color: #77ca64;
+}
+.quantity {
+    display: flex;
+    align-items: center;
+}
+.quantity > .title {
+    margin-right: 20px;
+}
+.change-quantity {
+    display: flex;
+}
+.change-quantity > * {
+    margin: 0;
+    padding: 0;
+}
+.change-quantity > button {
+    width: 50px;
+    height: 50px;
+    border: 1px solid #666;
+    background-color: white;
+    color: #343a40;
+    font-size: 25px;
+}
+.change-quantity > button:hover {
+    background-color: #77ca64;
+    border: 1px solid #77ca64;
+}
+.change-quantity > .now-quanity {
+    width: 100px;
+    height: 50px;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.subtract {
+    border-radius: 25px 0 0 25px;
+    -webkit-border-radius: 25px 0 0 25px;
+    -moz-border-radius: 25px 0 0 25px;
+    -ms-border-radius: 25px 0 0 25px;
+    -o-border-radius: 25px 0 0 25px;
+}
+.add {
+    border-radius: 0 25px 25px 0;
+    -webkit-border-radius: 0 25px 25px 0;
+    -moz-border-radius: 0 25px 25px 0;
+    -ms-border-radius: 0 25px 25px 0;
+    -o-border-radius: 0 25px 25px 0;
+}
+.add-to-cart {
+    padding: 10px 30px;
+    background-color: #77ca64;
+    border: 1px solid #77ca64;
+    font-size: 20px;
+    border-radius: 25px;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    -ms-border-radius: 25px;
+    -o-border-radius: 25px;
+}
+.add-to-cart:hover {
+    background-color: white;
+    color: #77ca64;
+    border: 1px solid #77ca64;
+}

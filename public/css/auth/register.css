@@ -1,0 +1,119 @@
+.content-container {
+    margin: 0 15%;
+}
+.register-page {
+    display: flex;
+    padding: 0 15%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.register-part {
+    width: 60%;
+    padding: 20px;
+    border: 2px solid #77ca64;
+}
+.profit-part {
+    width: 40%;
+    background-color: #77ca64;
+    padding: 20px;
+}
+.register-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.profit-title {
+    font-size: 20px;
+    font-weight: bold;
+}
+.form-group label {
+    font-size: 14px;
+    font-weight: bold;
+}
+.form-group span {
+    color: red;
+}
+.btn-register {
+    width: 100%;
+    background-color: #77ca64;
+    border: 1px solid #77ca64;
+}
+.btn-register:hover {
+    background-color: white;
+    color: #77ca64;
+    border: 1px solid #77ca64;
+}
+.line {
+    height: 2px;
+    background-color: rgb(155, 153, 153);
+    margin-top: 10px;
+}
+.login-or {
+    font-size: 12px;
+    text-align: center;
+    background-color: white;
+    margin-top: 10px;
+}
+.social-login {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.social-login > button {
+    margin: 10px;
+    width: 100px;
+}
+.btn-facebook {
+    border: none;
+}
+.btn-google, .btn-google:hover{
+    background-color: rgb(221, 81, 81);
+    border: none;
+}
+.forgot-password {
+    text-align: center;
+    font-size: 12px;
+    margin-top: 15px;
+}
+.forgot-password a {
+    color: #007bff;
+}
+.profit-part * {
+    color: white;
+}
+.profit-part > ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+.profit-title {
+    margin-bottom: 20px;
+}
+.profit-part li {
+    font-size: 14px;
+    margin-top: 10px;
+}
+.btn-login {
+    margin-top: 20px;
+    background-color: #77ca64;
+    border: 1px solid white;
+    width: 50%;
+}
+.btn-login:hover {
+    background-color: #77ca64;
+    border: 1px solid #343a40;
+    color: #343a40;
+}
+.go-home {
+    margin-top: 20px;
+}
+.go-home a{
+    color: #343a40;
+}
+.go-home a:hover {
+    color: #77ca64;
+    text-decoration: none;
+}
+.go-home p {
+    color: #77ca64;
+    display: inline-block;
+}
