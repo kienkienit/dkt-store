@@ -10,26 +10,23 @@
     <div class="container register-page">
         <div class="register-part">
             <h3 class="register-title">Đăng ký tài khoản</h3>
-            <form>
+            <form id="register-form" method="POST" action="{{ route('register') }}">
+                @csrf
                 <div class="form-group">
-                    <label for="fullname">Họ và tên <span>*</span></label>
-                    <input type="text" class="form-control" id="fullname" placeholder="Họ và tên">
+                    <label for="username">Username <span>*</span></label>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username">
                 </div>
                 <div class="form-group">
                     <label for="email">Email <span>*</span></label>
-                    <input type="email" class="form-control" id="email" placeholder="Email">
-                </div>
-                <div class="form-group">
-                    <label for="address">Địa chỉ <span>*</span></label>
-                    <input type="text" class="form-control" id="address" placeholder="Địa chỉ">
-                </div>
-                <div class="form-group">
-                    <label for="phone-number">Số điện thoại <span>*</span></label>
-                    <input type="text" class="form-control" id="phone-number" placeholder="Số điện thoại">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
                 </div>
                 <div class="form-group">
                     <label for="password">Mật khẩu <span>*</span></label>
-                    <input type="password" class="form-control" id="password" placeholder="Mật khẩu">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu">
+                </div>
+                <div class="form-group">
+                    <label for="password-confirm">Xác nhận mật khẩu <span>*</span></label>
+                    <input type="password" class="form-control" id="password-confirm" name="password_confirmation" placeholder="Xác nhận mật khẩu" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-register">Đăng ký</button>
                 <p class="login-or">Hoặc đăng nhập bằng</p>
@@ -49,7 +46,8 @@
                 <li>Tích điểm đối qua</li>
                 <li>Được giảm giá cho lần mua tiếp theo lên đến 10%</li>
             </ul>
-            <button type="button" class="btn btn-primary btn-login">Đăng nhập</button>
+            <button type="button" class="btn btn-primary btn-login" onclick="window.location.href='{{ route('login') }}'">Đăng nhập</button>
         </div>
     </div>
+    <script src="{{ asset('js/auth/register.js') }}"></script>
 @endsection

@@ -1,10 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\RegisterController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AdminController;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,15 +17,18 @@ use App\Http\Controllers\AdminController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
-Route::get('/register', function () {
-    return view('auth.register');
-})->name('register');
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('login', [LoginController::class, 'login']);
+
+Route::post('/logout', function () {
+    Auth::logout();
+    return redirect()->route('home');
+})->name('logout');
 
 Route::get('/home', function () {
     return view('pages.home');
@@ -50,4 +52,8 @@ Route::get('/news', function () {
 
 Route::get('/news_detail', function () {
     return view('pages.news_detail');
+})->name('news_detail');
+
+Route::get('/manage_products', function () {
+    return view('admin.manage_products');
 })->name('news_detail');
