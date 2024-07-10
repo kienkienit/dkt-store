@@ -93,6 +93,9 @@ header a {
     -ms-transform: translateY(-50%);
     -o-transform: translateY(-50%);
 }
+.btn-search:hover {
+    background-color: white;
+}
 .btn-search img {
     width: 20px;
     height: 20px;

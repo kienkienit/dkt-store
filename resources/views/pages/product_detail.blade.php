@@ -36,8 +36,5 @@
                 <button class="add-to-cart btn btn-primary">Thêm vào giỏ hàng</button>
             </div>
         </div>
-        <div class="middle-product-detail-container">
-            <div class="detail-title">Chi tiêt sản phẩm</div>
-        </div>
     </div>
 @endsection

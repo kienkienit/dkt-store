@@ -39,7 +39,7 @@
     color: #212529;
 }
 .dropdown-item a:hover {
-    background-color: #555;
+    background-color: #77ca64;
 }
 .navbar-item.dropdown:hover .dropdown-menu {
     display: block;
