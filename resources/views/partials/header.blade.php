@@ -38,7 +38,7 @@
     <div class="bottom-header">
         <div class="left-bottom-header">
             <div class="menu-icon">&#9776;</div>
-            <a href="#" class="logo">
+            <a href="/" class="logo">
                 <img src="//bizweb.dktcdn.net/100/047/633/themes/887206/assets/logo.png?1676252851087" alt="DKT Store">
             </a>
             <div class="secret-tag">&#9776;</div>

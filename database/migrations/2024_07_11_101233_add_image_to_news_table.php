@@ -11,12 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skus', function (Blueprint $table) {
-            $table->id();
-            $table->string('sku');
-            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-            $table->decimal('price',10,2);
-            $table->timestamps();
+        Schema::table('news', function (Blueprint $table) {
+            $table->string('image')->nullable()->after('content');
         });
     }
 
@@ -25,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skus');
+        Schema::table('news', function (Blueprint $table) {
+            $table->dropColumn('image');
+        });
     }
 };

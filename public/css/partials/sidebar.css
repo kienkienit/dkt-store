@@ -43,7 +43,7 @@
 .dropdown-arrow {
     float: right;
 }
-.dropdown-menu {
+.sidebar-item .dropdown-menu {
     display: none;
     list-style: none;
     padding: 0;

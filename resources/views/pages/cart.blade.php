@@ -3,7 +3,7 @@
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/pages/cart.css') }}">
     <div class="go-home">
-        <a href="#">Trang chủ</a>
+        <a href="/">Trang chủ</a>
         <span>>></span>
         <p>Giỏ hàng</p>
     </div>

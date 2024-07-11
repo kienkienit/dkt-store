@@ -2,17 +2,69 @@
     <div class="header-news-sidebar">
         <div class="left-header-news-sidebar">Tin tức</div>
         <div class="right-header-news-sidebar">
-            <button>1</button>
-            <button>2</button>
+            <button id="prev-sidebar-news">Truoc</button>
+            <button id="next-sidebar-news">Sau</button>
         </div>
     </div>
-    <div class="middle-news-sidebar">
-        <img src="https://bizweb.dktcdn.net/100/047/633/articles/ip6s.png?v=1469340252480" alt="Tin tức">
-        <div class="news-title"><a href="#">Mua iPhone 6s và iPhone 6s Plus chính hãng ở đâu?</a></div>
-        <div class="posted-time">11/01/2016</div>
-        <div class="justify">
-            Không ai có thể phủ nhận sức hút từ vẻ đẹp của những chiếc điện thoại của hãng Apple. 
-            Đặc biệt hơn, khi mà ở thời điểm hiện tại, giá iPhone 6s và iPhone 6s Plus đang giảm và dần dần trở nên vừa vặn với túi tiền của nhiều...
-        </div>
+    <div class="middle-news-sidebar" id="news-sidebar-content">
+        @foreach($news as $newsItem)
+            <img src="{{ $newsItem->image }}" alt="Tin tức">
+            <div class="news-title"><a href="{{ route('news.show', $newsItem->id) }}">{{ $newsItem->title }}</a></div>
+            <div class="posted-time">{{ \Carbon\Carbon::parse($newsItem->published_date)->format('d/m/Y') }}</div>
+            <div class="justify">
+                {{ Str::limit($newsItem->content, 150) }}
+            </div>
+        @endforeach
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        const sidebarShowLimit = 1;
+        let sidebarCurrentPage = 1;
+
+        function renderSidebarNews(news, page) {
+            $('#news-sidebar-content').empty();
+            const start = (page - 1) * sidebarShowLimit;
+            const end = start + sidebarShowLimit;
+            const paginatedNews = news.slice(start, end);
+
+            paginatedNews.forEach(function(newsItem) {
+                $('#news-sidebar-content').append(`
+                    <img src="${newsItem.image}" alt="Tin tức">
+                    <div class="news-title"><a href="/news/${newsItem.id}">${newsItem.title}</a></div>
+                    <div class="posted-time">${new Date(newsItem.published_date).toLocaleDateString('vi-VN')}</div>
+                    <div class="justify">
+                        ${newsItem.content.substring(0, 150)}...
+                    </div>
+                `);
+            });
+        }
+
+        function updateSidebarButtons(news) {
+            const totalPages = Math.ceil(news.length / sidebarShowLimit);
+            $('#prev-sidebar-news').prop('disabled', sidebarCurrentPage === 1);
+            $('#next-sidebar-news').prop('disabled', sidebarCurrentPage === totalPages);
+        }
+
+        $('#prev-sidebar-news').click(function() {
+            if (sidebarCurrentPage > 1) {
+                sidebarCurrentPage--;
+                renderSidebarNews(@json($news), sidebarCurrentPage);
+                updateSidebarButtons(@json($news));
+            }
+        });
+
+        $('#next-sidebar-news').click(function() {
+            const totalPages = Math.ceil(@json($news).length / sidebarShowLimit);
+            if (sidebarCurrentPage < totalPages) {
+                sidebarCurrentPage++;
+                renderSidebarNews(@json($news), sidebarCurrentPage);
+                updateSidebarButtons(@json($news));
+            }
+        });
+
+        renderSidebarNews(@json($news), sidebarCurrentPage);
+        updateSidebarButtons(@json($news));
+    });
+</script>

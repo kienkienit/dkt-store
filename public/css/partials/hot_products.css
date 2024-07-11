@@ -21,12 +21,20 @@
 .hot-item > a:hover {
     text-decoration: none;
     background-color: #77ca64;
+    font-weight: bold;
+}
+.hot-item.active a {
+    background-color: #77ca64;
+    font-weight: bold;
 }
 .middle-hot-products {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: calc((100% - 1000px)/3);
+}
+.product-link:hover {
+    text-decoration: none;
 }
 .product-item {
     display: flex;

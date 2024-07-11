@@ -6,27 +6,35 @@
     justify-content: space-between;
     align-items: center;
 }
-.hot-menu {
+.category-menu {
     list-style-type: none;
     padding: 0;
     margin: 0;
     display: flex;
 }
-.hot-item > a {
+.category-item > a {
     color: #666;
     display: block;
     padding: 5px;
     margin-left: 5px;
 }
-.hot-item > a:hover {
+.category-item > a:hover {
     text-decoration: none;
     background-color: #77ca64;
+    font-weight: bold;
+}
+.category-item.active a {
+    background-color: #77ca64;
+    font-weight: bold;
 }
 .middle-products {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
     gap: calc((100% - 1000px)/3);
+}
+.product-link:hover {
+    text-decoration: none;
 }
 .product-item {
     display: flex;

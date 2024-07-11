@@ -2,8 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\User\RegisterController;
+use App\Http\Controllers\User\ProductController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,45 +20,34 @@ use App\Http\Controllers\Auth\LoginController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [RegisterController::class, 'register']);
 
-Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
 
 Route::post('/logout', function () {
     Auth::logout();
     return redirect()->route('home');
 })->name('logout');
 
-Route::get('/home', function () {
-    return view('pages.home');
-})->name('home');
+Route::resource('categories', CategoryController::class);
 
-Route::get('/product_detail', function () {
-    return view('pages.product_detail');
-})->name('product_detail');
+Route::resource('products', ProductController::class);
 
-Route::get('/cart', function () {
-    return view('pages.cart');
-})->name('cart');
+Route::get('/product/{id}', [ProductController::class, 'show'])->name('product.detail');
+Route::get('products/hot/{categoryId}', [ProductController::class, 'getHotProductsByCategory'])->name('user.products.hot');
+Route::get('products/category/{categoryId}', [ProductController::class, 'getByCategory'])->name('user.products.category');
 
-Route::get('/payment', function () {
-    return view('pages.payment');
-})->name('payment');
+Route::get('/news', [NewsController::class, 'index'])->name('news.index');
+Route::get('/news/{id}', [NewsController::class, 'show'])->name('news.show');
 
-Route::get('/news', function () {
-    return view('pages.news');
-})->name('news');
 
-Route::get('/news_detail', function () {
-    return view('pages.news_detail');
-})->name('news_detail');
+// Route::prefix('user')->middleware('role:user')->group(function () {
+//     Route::resource('products', ProductController::class);
+//     Route::get('products/category/{categoryId}', [ProductController::class, 'getByCategory'])->name('user.products.category');
+//     Route::get('products/hot/{categoryId}', [ProductController::class, 'getHotProductsByCategory'])->name('user.products.hot');
+// });
 
-Route::get('/manage_products', function () {
-    return view('admin.manage_products');
-})->name('news_detail');

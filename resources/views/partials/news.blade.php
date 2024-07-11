@@ -2,46 +2,75 @@
     <div class="header-news-container">
         <div class="left-header-news-container">Tin tức</div>
         <div class="right-header-news-container">
-            <button>1</button>
-            <button>2</button>
+            <button id="prev-news">truoc</button>
+            <button id="next-news">sau</button>
         </div>
     </div>
-    <div class="middle-news-container">
+    <div class="middle-news-container" id="news-list">
         <div class="news-item">
-            <img src="https://bizweb.dktcdn.net/100/047/633/articles/ip6s.png?v=1469340252480" alt="Tin tức">
-            <div class="news-title"><a href="#">Mua iPhone 6s và iPhone 6s Plus chính hãng ở đâu?</a></div>
-            <div class="posted-time">11/01/2016</div>
-            <div class="justify">
-                Không ai có thể phủ nhận sức hút từ vẻ đẹp của những chiếc điện thoại của hãng Apple. 
-                Đặc biệt hơn, khi mà ở thời điểm hiện tại, giá iPhone 6s và iPhone 6s Plus đang giảm và dần dần trở nên vừa vặn với túi tiền của nhiều...
-            </div>
-        </div>
-        <div class="news-item">
-            <img src="https://bizweb.dktcdn.net/100/047/633/articles/ip6s.png?v=1469340252480" alt="Tin tức">
-            <div class="news-title"><a href="#">Mua iPhone 6s và iPhone 6s Plus chính hãng ở đâu?</a></div>
-            <div class="posted-time">11/01/2016</div>
-            <div class="justify">
-                Không ai có thể phủ nhận sức hút từ vẻ đẹp của những chiếc điện thoại của hãng Apple. 
-                Đặc biệt hơn, khi mà ở thời điểm hiện tại, giá iPhone 6s và iPhone 6s Plus đang giảm và dần dần trở nên vừa vặn với túi tiền của nhiều...
-            </div>
-        </div>
-        <div class="news-item">
-            <img src="https://bizweb.dktcdn.net/100/047/633/articles/ip6s.png?v=1469340252480" alt="Tin tức">
-            <div class="news-title"><a href="#">Mua iPhone 6s và iPhone 6s Plus chính hãng ở đâu?</a></div>
-            <div class="posted-time">11/01/2016</div>
-            <div class="justify">
-                Không ai có thể phủ nhận sức hút từ vẻ đẹp của những chiếc điện thoại của hãng Apple. 
-                Đặc biệt hơn, khi mà ở thời điểm hiện tại, giá iPhone 6s và iPhone 6s Plus đang giảm và dần dần trở nên vừa vặn với túi tiền của nhiều...
-            </div>
-        </div>
-        <div class="news-item">
-            <img src="https://bizweb.dktcdn.net/100/047/633/articles/ip6s.png?v=1469340252480" alt="Tin tức">
-            <div class="news-title"><a href="#">Mua iPhone 6s và iPhone 6s Plus chính hãng ở đâu?</a></div>
-            <div class="posted-time">11/01/2016</div>
-            <div class="justify">
-                Không ai có thể phủ nhận sức hút từ vẻ đẹp của những chiếc điện thoại của hãng Apple. 
-                Đặc biệt hơn, khi mà ở thời điểm hiện tại, giá iPhone 6s và iPhone 6s Plus đang giảm và dần dần trở nên vừa vặn với túi tiền của nhiều...
-            </div>
+            @foreach($news as $newsItem)
+                <div class="news-item">
+                    <img src="{{ $newsItem->image }}" alt="Tin tức">
+                    <div class="news-title"><a href="{{ route('news.show', $newsItem->id) }}">{{ $newsItem->title }}</a></div>
+                    <div class="posted-time">{{ \Carbon\Carbon::parse($newsItem->published_date)->format('d/m/Y') }}</div>
+                    <div class="justify">
+                        {{ Str::limit($newsItem->content, 150) }}
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        const showLimit = 4;
+        let currentPage = 1;
+
+        function renderNews(news, page) {
+            $('#news-list').empty();
+            const start = (page - 1) * showLimit;
+            const end = start + showLimit;
+            const paginatedNews = news.slice(start, end);
+
+            paginatedNews.forEach(function(newsItem) {
+                $('#news-list').append(`
+                    <div class="news-item">
+                        <img src="${newsItem.image}" alt="Tin tức">
+                        <div class="news-title"><a href="/news/${newsItem.id}">${newsItem.title}</a></div>
+                        <div class="posted-time">${new Date(newsItem.published_date).toLocaleDateString('vi-VN')}</div>
+                        <div class="justify">
+                            ${newsItem.content.substring(0, 150)}...
+                        </div>
+                    </div>
+                `);
+            });
+        }
+
+        function updateButtons(news) {
+            const totalPages = Math.ceil(news.length / showLimit);
+            $('#prev-news').prop('disabled', currentPage === 1);
+            $('#next-news').prop('disabled', currentPage === totalPages);
+        }
+
+        $('#prev-news').click(function() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderNews(@json($news), currentPage);
+                updateButtons(@json($news));
+            }
+        });
+
+        $('#next-news').click(function() {
+            const totalPages = Math.ceil(@json($news).length / showLimit);
+            if (currentPage < totalPages) {
+                currentPage++;
+                renderNews(@json($news), currentPage);
+                updateButtons(@json($news));
+            }
+        });
+
+        renderNews(@json($news), currentPage);
+        updateButtons(@json($news));
+    });
+</script>
