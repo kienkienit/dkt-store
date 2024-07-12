@@ -21,4 +21,9 @@ class ProductVariant extends Model
     public function product() {
         return $this->belongsTo(Product::class);
     }
+
+    public function cartItems()
+    {
+        return $this->hasMany(CartItem::class, 'variant_id');
+    }
 }

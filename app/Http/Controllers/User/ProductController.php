@@ -24,7 +24,12 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = $this->productService->getProductById($id);
-        return view('pages.product_detail', compact('product'));
+        $product->load('variants');
+
+        $firstVariant = $product->variants->first();
+        $initialPrice = $firstVariant ? $firstVariant->price : $product->price;
+        // dd($product->variants);
+        return view('pages.product_detail', compact('product', 'initialPrice'));
     }
 
     public function store(Request $request)
