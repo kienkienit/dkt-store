@@ -156,6 +156,11 @@
                     alert('Có lỗi xảy ra khi xóa tất cả sản phẩm. Vui lòng thử lại.');
                 });
             }
+
+            const payButton = document.querySelector('.pay');
+            payButton.addEventListener('click', function () {
+                window.location.href = "/user/payment";
+            });
         });
     </script>
 @endsection

@@ -24,9 +24,7 @@ class ShareCategories
     public function handle(Request $request, Closure $next)
     {
         $categories = $this->categoryService->getAllCategories();
-
         view()->share("categories", $categories);
-
         return $next($request);
     }
 }

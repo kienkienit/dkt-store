@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Services\ProductService;
 
 class ProductController extends Controller
@@ -25,34 +24,15 @@ class ProductController extends Controller
     {
         $product = $this->productService->getProductById($id);
         $product->load('variants');
-
         $firstVariant = $product->variants->first();
         $initialPrice = $firstVariant ? $firstVariant->price : $product->price;
-        // dd($product->variants);
         return view('pages.product_detail', compact('product', 'initialPrice'));
-    }
-
-    public function store(Request $request)
-    {
-        $product = $this->productService->createProduct($request->all());
-        return redirect()->route('products.index');
-    }
-
-    public function update(Request $request, $id)
-    {
-        $product = $this->productService->updateProduct($id, $request->all());
-        return redirect()->route('products.index');
-    }
-
-    public function destroy($id)
-    {
-        $this->productService->deleteProduct($id);
-        return redirect()->route('products.index');
     }
 
     public function getByCategory($categoryId)
     {
-        $products = $this->productService->getProductsByCategory($categoryId);
+        $perPage = request()->query('per_page', 8);
+        $products = $this->productService->getProductsByCategory($categoryId, $perPage);
         return response()->json($products);
     }
 

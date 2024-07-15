@@ -2,22 +2,23 @@
 
 namespace App\Services;
 
+use App\Repositories\CartItemRepository;
 use App\Repositories\CartRepository;
 use Illuminate\Support\Facades\Log;
 
 class CartService
 {
     protected $cartRepository;
+    protected $cartItemRepository;
 
-    public function __construct(CartRepository $cartRepository)
+    public function __construct(CartRepository $cartRepository, CartItemRepository $cartItemRepository)
     {
         $this->cartRepository = $cartRepository;
+        $this->cartItemRepository = $cartItemRepository;
     }
 
     public function createOrUpdateCart($userId, $data)
     {
-        Log::info('Creating or updating cart for user:', ['user_id' => $userId, 'data' => $data]);
-
         return $this->cartRepository->createOrUpdateCart($userId, $data);
     }
 
@@ -33,7 +34,12 @@ class CartService
 
     public function deleteCartItem($itemId)
     {
-        return $this->cartRepository->deleteCartItem($itemId);
+        return $this->cartItemRepository->deleteByItemId($itemId);
+    }
+
+    public function deleteCartItemByProductId($productId)
+    {
+        return $this->cartItemRepository->deleteCartItemByProductId($productId);
     }
 
     public function deleteAllCartItems($userId)

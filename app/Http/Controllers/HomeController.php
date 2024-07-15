@@ -13,13 +13,15 @@ class HomeController extends Controller
     protected CategoryService $categoryService;
     protected NewsService $newsService;
 
-    public function __construct(ProductService $productService, CategoryService $categoryService, NewsService $newsService) {
+    public function __construct(ProductService $productService, CategoryService $categoryService, NewsService $newsService) 
+    {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
         $this->newsService = $newsService;
     }
 
-    public function index() {
+    public function index() 
+    {
         $categories = $this->categoryService->getAllCategories();
         $firstCategory = $categories->first();
         $products = $this->productService->getProductsByCategory($firstCategory->id);

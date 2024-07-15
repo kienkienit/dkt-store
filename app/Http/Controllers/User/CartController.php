@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\CartService;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 
 class CartController extends Controller
 {
@@ -20,15 +19,6 @@ class CartController extends Controller
     public function createOrUpdateCart(Request $request)
     {
         $user = Auth::user();
-
-        Log::info('User adding to cart:', [
-            'user_id' => $user->id,
-            'product_id' => $request->input('product_id'),
-            'variant_id' => $request->input('variant_id'),
-            'quantity' => $request->input('quantity'),
-            'price' => $request->input('price'),
-        ]);
-
         $result = $this->cartService->createOrUpdateCart($user->id, $request->all());
 
         if ($result) {
@@ -41,9 +31,7 @@ class CartController extends Controller
     public function show()
     {
         $cart = $this->cartService->getCartByUserId(Auth::user()->id);
-
         $cart->load('items.product', 'items.variant');
-        
         return view('pages.cart', compact('cart'));
     }
 
@@ -64,5 +52,14 @@ class CartController extends Controller
         $this->cartService->deleteAllCartItems(Auth::user()->id);
         return response()->json(['success' => true]);
     }
+
+    public function showPaymentPage()
+    {
+        $user = Auth::user();
+        $cart = $this->cartService->getCartByUserId($user->id);
+        $cart->load('items.product', 'items.variant');
+        return view('pages.payment', compact('cart'));
+    }
+
 }
 

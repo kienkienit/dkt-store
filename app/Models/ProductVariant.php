@@ -18,7 +18,8 @@ class ProductVariant extends Model
         'stock_quantity',
     ];
 
-    public function product() {
+    public function product() 
+    {
         return $this->belongsTo(Product::class);
     }
 

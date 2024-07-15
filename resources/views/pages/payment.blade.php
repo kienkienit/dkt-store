@@ -22,17 +22,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach($cart->items as $item)
+                            <tr data-product-id="{{ $item->product->id }}">
+                                <td><img src="{{ $item->product->image }}" alt="Image"></td>
+                                <td>{{ $item->product->name }}</td>
+                                <td>{{ $item->quantity }}</td>
+                                <td>{{ number_format($item->variant->price * $item->quantity, 0, ',', '.') }} VND</td>
+                            </tr>
+                        @endforeach
                         <tr>
-                            <td><img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/047/633/products/iphone-6s---6s-plus-hong-color-x96i-91-uw67-ts-m58z-4y.jpg?v=1469338556760" alt="Image"></td>
-                            <td>APPLE IPHONE 6S PLUS ROSE GOLD 128GB</td>
-                            <td>1</td>
-                            <td>27.490.000 VND</td>
-                        </tr>
-                        <tr>
-                            <td><img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/047/633/products/iphone-6s---6s-plus-hong-color-x96i-91-uw67-ts-m58z-4y.jpg?v=1469338556760" alt="Image"></td>
-                            <td>APPLE IPHONE 6S PLUS ROSE GOLD 128GB</td>
-                            <td>1</td>
-                            <td>27.490.000 VND</td>
+                            <td colspan="3" class="text-right"><strong>Tổng tiền đơn hàng:</strong></td>
+                            <td><strong>{{ number_format($cart->items->sum(function($item) { return $item->price * $item->quantity; }), 0, ',', '.') }} VND</strong></td>
                         </tr>
                     </tbody>
                 </table>
@@ -40,21 +40,24 @@
         </div>
         <div class="order-info">
             <div class="title">Nhập đầy đủ thông tin để đặt hàng</div>
-            <form>
+            <form id="order-form" method="POST" action="{{ route('order.submit') }}">
+                @csrf
+                <input type="hidden" id="items" name="items">
+                <input type="hidden" id="total_amount" name="total_amount">
                 <div class="form-group">
-                    <label for="name">Ho ten <span>*</span></label>
-                    <input type="text" class="form-control" id="name" placeholder="Nhap ho ten">
+                    <label for="name">Họ tên <span>*</span></label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nhập họ tên">
                 </div>
                 <div class="form-group">
-                    <label for="address">Dia chi nhan hang <span>*</span></label>
-                    <input type="text" class="form-control" id="address" placeholder="Nhap dia chi">
+                    <label for="address">Địa chỉ nhận hàng <span>*</span></label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Nhập địa chỉ">
                 </div>
                 <div class="form-group">
-                    <label for="phone-number">So dien thoai <span>*</span></label>
-                    <input type="text" class="form-control" id="phone-number" placeholder="+84xxxxxxxxx">
+                    <label for="phone-number">Số điện thoại <span>*</span></label>
+                    <input type="text" class="form-control" id="phone-number" name="phone_number" placeholder="+84xxxxxxxxx">
                 </div>
                 <div class="form-group">
-                    <label for="payment-method">Phuong thuc thanh toan <span>*</span></label>
+                    <label for="payment-method">Phương thức thanh toán <span>*</span></label>
                     <select id="payment-method" name="payment_method" class="form-control">
                         <option value="cod">Thanh toán khi nhận hàng</option>
                         <option value="bank_transfer">Chuyển khoản ngân hàng</option>
@@ -63,10 +66,55 @@
                     </select>
                 </div>
                 <div class="button-form">
-                    <button type="submit" class="btn btn-primary btn-order">Dat hang</button>
-                    <button class="btn-back-to-home btn btn-primary">Quay lai trang chu</button>
+                    <button type="submit" class="btn btn-primary btn-order">Đặt hàng</button>
+                    <button class="btn-back-to-home btn btn-primary">Quay lại trang chủ</button>
                 </div>
-            </form>
+            </form>            
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const form = document.getElementById("order-form");
+    
+            form.addEventListener("submit", function(event) {
+                event.preventDefault();
+    
+                let items = [];
+                let totalAmount = 0;
+    
+                document.querySelectorAll('.cart-detail tbody tr').forEach(row => {
+                    const productId = row.getAttribute('data-product-id');
+
+                    const productNameCell = row.cells[1];
+                    const productName = productNameCell ? productNameCell.textContent : '';
+
+                    const quantityCell = row.cells[2];
+                    const quantity = quantityCell ? parseInt(quantityCell.textContent) : 0;
+
+                    const priceCell = row.cells[3];
+                    const priceText = priceCell ? priceCell.textContent : '';
+
+                    const price = parseFloat(priceText.replace(/[.]+/g, ''));
+                    
+                    if (!isNaN(quantity) && quantity > 0 && !isNaN(price) && price > 0) {
+                        const product = {
+                            product_id: productId,
+                            name: productName,
+                            quantity: quantity,
+                            price: price
+                        };
+        
+                        items.push(product);
+        
+                        totalAmount += price;
+                    }
+                });
+
+                document.getElementById("items").value = JSON.stringify(items);
+                document.getElementById("total_amount").value = totalAmount;
+
+                form.submit();
+            });
+        });
+    </script>    
 @endsection

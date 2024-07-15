@@ -23,9 +23,9 @@ class ProductRepository
         return $this->product->find($id);
     }
 
-    public function getProductsByCategory($categoryId)
+    public function getProductsByCategory($categoryId, $perPage = 8)
     {
-        return $this->product->where('category_id', $categoryId)->get();
+        return $this->product->where('category_id', $categoryId)->paginate($perPage);
     }
 
     public function getHotProductsByCategory($categoryId)

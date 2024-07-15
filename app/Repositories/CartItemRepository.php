@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\CartItem;
+use Illuminate\Support\Facades\DB;
 
 class CartItemRepository
 {
@@ -19,5 +20,15 @@ class CartItemRepository
             ['cart_id' => $cartId, 'product_id' => $productId, 'variant_id' => $variantId],
             ['quantity' => $quantity, 'price' => $price]
         );
+    }
+
+    public function deleteByItemId($itemId)
+    {
+        return $this->cartItem->where('id', $itemId)->delete();
+    }
+
+    public function deleteCartItemByProductId($productId)
+    {
+        return $this->cartItem->where('product_id', $productId)->delete();
     }
 }
