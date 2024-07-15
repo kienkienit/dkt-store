@@ -56,6 +56,7 @@ class ProductVariantSeeder extends Seeder
                 'updated_at' => now(),
             ],
         ];
+        
         DB::table('product_variants')->insert($variants);
 
         // Cập nhật giá sản phẩm

@@ -26,7 +26,7 @@ class SubmitOrderRequest extends FormRequest
             'address' => 'required|string',
             'phone_number' => 'required|string',
             'payment_method' => 'required|string',
-            'items' => 'required|array',
+            'items' => 'required',
         ];
     }
 }

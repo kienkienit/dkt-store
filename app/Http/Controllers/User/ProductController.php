@@ -39,6 +39,6 @@ class ProductController extends Controller
     public function getHotProductsByCategory($categoryId)
     {
         $hotProducts = $this->productService->getHotProductsByCategory($categoryId);
-        return response()->json($hotProducts);
+        return json_response(true, $hotProducts);
     }
 }

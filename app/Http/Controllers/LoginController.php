@@ -24,14 +24,7 @@ class LoginController extends Controller
 
     public function login(LoginUserRequest $request) 
     {
-        // dd(request());
-        // $validatedData = $request->validate([
-        //     'username' => 'required|string|max:255',
-        //     'password' => 'required|string|min:8',
-        // ]);
-
         $validatedData = $request->validated();
-
         $user = $this->userService->loginUser($validatedData);
 
         if ($user) {

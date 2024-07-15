@@ -21,11 +21,7 @@ class CartController extends Controller
         $user = Auth::user();
         $result = $this->cartService->createOrUpdateCart($user->id, $request->all());
 
-        if ($result) {
-            return response()->json(['success' => true]);
-        } else {
-            return response()->json(['success' => false], 500);
-        }
+        return $result ? json_response(true) : json_response(false, null, 500);
     }
 
     public function show()
@@ -38,19 +34,19 @@ class CartController extends Controller
     public function updateCartItemQuantity(Request $request)
     {
         $this->cartService->updateCartItemQuantity($request->item_id, $request->quantity);
-        return response()->json(['success' => true]);
+        return json_response(true);
     }
 
     public function deleteCartItem(Request $request)
     {
         $this->cartService->deleteCartItem($request->item_id);
-        return response()->json(['success' => true]);
+        return json_response(true);
     }
 
     public function deleteAllCartItems()
     {
         $this->cartService->deleteAllCartItems(Auth::user()->id);
-        return response()->json(['success' => true]);
+        return json_response(true);
     }
 
     public function showPaymentPage()
@@ -60,6 +56,5 @@ class CartController extends Controller
         $cart->load('items.product', 'items.variant');
         return view('pages.payment', compact('cart'));
     }
-
 }
 

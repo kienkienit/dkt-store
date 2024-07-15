@@ -4,13 +4,13 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\User\RegisterController;
 use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ProductVariantController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\Admin\CategoryController;
 
 /*
 |--------------------------------------------------------------------------

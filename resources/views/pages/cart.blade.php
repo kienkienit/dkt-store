@@ -2,6 +2,7 @@
 @section('title', 'Cart')
 @section('content')
     <link rel="stylesheet" href="{{ asset('css/pages/cart.css') }}">
+
     <div class="go-home">
         <a href="/">Trang chủ</a>
         <span>>></span>
@@ -55,112 +56,6 @@
             <button class="pay btn btn-primary">Thanh toán</button>
         </div>
     </div>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Xử lý thay đổi số lượng sản phẩm
-            const quantityInputs = document.querySelectorAll('.quantity-input');
-            quantityInputs.forEach(input => {
-                input.addEventListener('change', function () {
-                    const itemId = this.dataset.itemId;
-                    const quantity = this.value;
-                    updateCartItemQuantity(itemId, quantity);
-                });
-            });
 
-            // Xử lý xóa sản phẩm
-            const deleteButtons = document.querySelectorAll('.btn-delete');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function () {
-                    const itemId = this.dataset.itemId;
-                    deleteCartItem(itemId);
-                });
-            });
-
-            // Xử lý xóa tất cả sản phẩm
-            const removeAllButton = document.querySelector('.remove-all');
-            if (removeAllButton) {
-                removeAllButton.addEventListener('click', function () {
-                    if (confirm('Bạn có chắc chắn muốn xóa tất cả sản phẩm khỏi giỏ hàng không?')) {
-                        deleteAllCartItems();
-                    }
-                });
-            }
-
-            // Hàm cập nhật số lượng sản phẩm trong giỏ hàng
-            function updateCartItemQuantity(itemId, quantity) {
-                fetch('/user/cart/update', {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ item_id: itemId, quantity: quantity })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload();
-                    } else {
-                        alert('Có lỗi xảy ra khi cập nhật số lượng sản phẩm. Vui lòng thử lại.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra khi cập nhật số lượng sản phẩm. Vui lòng thử lại.');
-                });
-            }
-
-            // Hàm xóa sản phẩm khỏi giỏ hàng
-            function deleteCartItem(itemId) {
-                fetch('/user/cart/delete', {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ item_id: itemId })
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload();
-                    } else {
-                        alert('Có lỗi xảy ra khi xóa sản phẩm. Vui lòng thử lại.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra khi xóa sản phẩm. Vui lòng thử lại.');
-                });
-            }
-
-            // Hàm xóa tất cả sản phẩm khỏi giỏ hàng
-            function deleteAllCartItems() {
-                fetch('/user/cart/delete-all', {
-                    method: 'DELETE',
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                        'Content-Type': 'application/json'
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        location.reload();
-                    } else {
-                        alert('Có lỗi xảy ra khi xóa tất cả sản phẩm. Vui lòng thử lại.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Có lỗi xảy ra khi xóa tất cả sản phẩm. Vui lòng thử lại.');
-                });
-            }
-
-            const payButton = document.querySelector('.pay');
-            payButton.addEventListener('click', function () {
-                window.location.href = "/user/payment";
-            });
-        });
-    </script>
+    <script src="{{ asset('js/user/cart.js') }}"></script>
 @endsection
