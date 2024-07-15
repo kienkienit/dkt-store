@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Cart;
 use App\Models\CartItem;
+use Illuminate\Support\Facades\DB;
 
 class CartRepository
 {
@@ -53,9 +54,16 @@ class CartRepository
         if ($item) {
             $item->quantity = $quantity;
             $item->save();
+
+            $cartTotal = $this->cartItem->where('cart_id', $item->cart_id)->sum(DB::raw('price * quantity'));
+
+            return [
+                'item' => $item,
+                'cart_total' => $cartTotal
+            ];
         }
 
-        return $item;
+        return null;
     }
 
     public function deleteCartItem($itemId)

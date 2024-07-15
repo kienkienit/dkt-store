@@ -33,8 +33,28 @@ class CartController extends Controller
 
     public function updateCartItemQuantity(Request $request)
     {
-        $this->cartService->updateCartItemQuantity($request->item_id, $request->quantity);
-        return json_response(true);
+        $result = $this->cartService->updateCartItemQuantity($request->item_id, $request->quantity);
+
+        if ($result && $result['item']) {
+            $response = [
+                'success' => true,
+                'data' => [
+                    'item' => [
+                        'price' => $result['item']->price,
+                        'price_formatted' => number_format($result['item']->price, 0, ',', '.'),
+                    ],
+                    'total' => number_format($result['item']->price * $result['item']->quantity, 0, ',', '.'),
+                    'cart_total' => number_format($result['cart_total'], 0, ',', '.'),
+                ],
+            ];
+        } else {
+            $response = [
+                'success' => false,
+                'data' => null,
+            ];
+        }
+
+        return response()->json($response);
     }
 
     public function deleteCartItem(Request $request)

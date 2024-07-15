@@ -34,12 +34,39 @@ document.addEventListener('DOMContentLoaded', function () {
             },
             body: JSON.stringify({ item_id: itemId, quantity: quantity })
         })
-        .then(response => response.json())
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
         .then(data => {
+            console.log('Data received:', data); 
             if (data.success) {
-                location.reload();
+                const row = document.querySelector(`.quantity-input[data-item-id="${itemId}"]`).parentNode.parentNode;
+                const priceCell = row.querySelector('td:nth-child(3)');
+                const totalPriceCell = row.querySelector('td:nth-child(5)');
+                const totalPriceElement = document.querySelector('.total-price .price');
+
+                function convertPriceStringToFloat(priceString) {
+                    let cleanedPrice = priceString.trim().replace(/[.]+/g, '').replace('VND', '');
+                    return parseFloat(cleanedPrice);
+                }
+
+                if (priceCell) {
+                    priceCell.textContent = convertPriceStringToFloat(data.data.item.price_formatted).toLocaleString();
+                }
+
+                if (totalPriceCell) {
+                    totalPriceCell.textContent = convertPriceStringToFloat(data.data.total).toLocaleString();
+                }
+
+                if (totalPriceElement) {
+                    totalPriceElement.textContent = convertPriceStringToFloat(data.data.cart_total).toLocaleString();
+                }
+
             } else {
-                alert('Có lỗi xảy ra khi cập nhật số lượng sản phẩm. Vui lòng thử lại.');
+                throw new Error('Update quantity failed');
             }
         })
         .catch(error => {
@@ -60,7 +87,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                location.reload();
+                const row = document.querySelector(`.btn-delete[data-item-id="${itemId}"]`).parentNode.parentNode;
+                row.parentNode.removeChild(row);
             } else {
                 alert('Có lỗi xảy ra khi xóa sản phẩm. Vui lòng thử lại.');
             }
@@ -82,7 +110,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                location.reload();
+                const cartTableBody = document.querySelector('.cart-detail tbody');
+                cartTableBody.innerHTML = '<tr><td colspan="6">Giỏ hàng của bạn trống.</td></tr>';
             } else {
                 alert('Có lỗi xảy ra khi xóa tất cả sản phẩm. Vui lòng thử lại.');
             }
