@@ -2,8 +2,12 @@
     <div class="header-news-sidebar">
         <div class="left-header-news-sidebar">Tin tức</div>
         <div class="right-header-news-sidebar">
-            <button id="prev-sidebar-news">Truoc</button>
-            <button id="next-sidebar-news">Sau</button>
+            <button id="prev-sidebar-news">
+                <img src="images/icon_left.svg" alt="Icon">
+            </button>
+            <button id="next-sidebar-news">
+                <img src="images/icon_right.svg" alt="Icon">
+            </button>
         </div>
     </div>
     <div class="middle-news-sidebar" id="news-sidebar-content">

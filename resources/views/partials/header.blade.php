@@ -45,6 +45,11 @@
             <a href="/" class="logo">
                 <img src="//bizweb.dktcdn.net/100/047/633/themes/887206/assets/logo.png?1676252851087" alt="DKT Store">
             </a>
+            <button class="navbar-toggler none-button">
+                <div class="navbar-toggler-icon"></div>
+                <div class="navbar-toggler-icon"></div>
+                <div class="navbar-toggler-icon"></div>
+            </button>
         </div>
         <div class="mid-bottom-header">
             <form action="/search" class="search-form">
@@ -94,6 +99,10 @@
                         window.location.href = '/login';
                     });
             });
+        }
+        function toggleMenu() {
+            const menu = document.getElementById('navbar');
+            menu.classList.toggle('show');
         }
     });    
 </script>

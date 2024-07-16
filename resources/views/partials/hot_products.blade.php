@@ -11,16 +11,18 @@
     </div>
     <div class="middle-hot-products" id="hot-product-list">
         @foreach ($hotProducts->take(4) as $product)
-            <a href="{{ route('product.detail', $product->id) }}" class="product-link">
-                <div class="product-item">
-                    <span class="is-loved"></span>
-                    <img src="{{ $product->image }}" alt="Image">
-                    <div class="name">{{ $product->name }}</div>
-                    <div class="price">{{ number_format($product->price, 0, ',', '.') }} VND</div>
-                    <button class="btn btn-primary add-to-cart">CHỌN SẢN PHẨM</button>
-                </div>
-                @endforeach
-            </a>
+            <div class="col-lg-3 col-md-4 col-sm-6 mb-4 p-0">
+                <a href="{{ route('product.detail', $product->id) }}" class="product-link">
+                    <div class="product-item">
+                        <span class="is-loved"></span>
+                        <img src="{{ $product->image }}" alt="Image">
+                        <div class="name">{{ $product->name }}</div>
+                        <div class="price">{{ number_format($product->price, 0, ',', '.') }} VND</div>
+                        <button class="btn btn-primary add-to-cart">CHỌN SẢN PHẨM</button>
+                    </div>
+                </a>
+            </div>
+        @endforeach
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
