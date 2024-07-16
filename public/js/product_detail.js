@@ -1,6 +1,4 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const colorSelect = document.getElementById('color-select');
-    const storageSelect = document.getElementById('storage-select');
     const productPrice = document.getElementById('product-price');
     const subtractButton = document.querySelector('.subtract');
     const addButton = document.querySelector('.add');
@@ -13,11 +11,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const variantsDataElement = document.getElementById('variantsData');
     const variants = JSON.parse(variantsDataElement.getAttribute('data-variants'));
     let quantity = parseInt(quantityDisplay ? quantityDisplay.textContent : '1', 10);
+    let selectedColor = null;
+    let selectedStorage = null;
 
     function updatePrice() {
-        const selectedColor = colorSelect ? colorSelect.value : null;
-        const selectedStorage = storageSelect ? storageSelect.value : null;
-
         if (selectedColor && selectedStorage) {
             const selectedVariant = variants.find(variant =>
                 variant.color === selectedColor && variant.storage === selectedStorage
@@ -47,13 +44,34 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    if (colorSelect) {
-        colorSelect.addEventListener('change', updatePrice);
+    function selectFirstButton(buttons) {
+        if (buttons.length > 0) {
+            buttons[0].classList.add('active');
+            buttons[0].click();
+        }
     }
 
-    if (storageSelect) {
-        storageSelect.addEventListener('change', updatePrice);
-    }
+    document.querySelectorAll('.color-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            document.querySelectorAll('.color-button').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+            selectedColor = button.getAttribute('data-color');
+            updatePrice();
+        });
+    });
+
+    document.querySelectorAll('.storage-button').forEach(function(button) {
+        button.addEventListener('click', function() {
+            document.querySelectorAll('.storage-button').forEach(function(btn) {
+                btn.classList.remove('active');
+            });
+            button.classList.add('active');
+            selectedStorage = button.getAttribute('data-storage');
+            updatePrice();
+        });
+    });
 
     if (subtractButton) {
         subtractButton.addEventListener('click', function () {
@@ -101,6 +119,9 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Có lỗi xảy ra khi thêm vào giỏ hàng. Vui lòng thử lại.');
         });
     });
+
+    selectFirstButton(document.querySelectorAll('.color-button'));
+    selectFirstButton(document.querySelectorAll('.storage-button'));
 
     updatePrice();
     updateQuantityDisplay();
