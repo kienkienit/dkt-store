@@ -26,35 +26,4 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $(document).ready(function() {
-        $('.hot-category-link').on('click', function(e) {
-            e.preventDefault();
-            var categoryId = $(this).data('id');
-            $('.hot-item').removeClass('active');
-            $(this).parent().addClass('active');
-            $.ajax({
-                url: '/products/hot/' + categoryId,
-                method: 'GET',
-                success: function(data) {
-                    $('#hot-product-list').empty();
-                    var productsToShow = data.slice(0, 4);
-                    productsToShow.forEach(function(product) {
-                        $('#hot-product-list').append(`
-                            <div class="product-item">
-                                <span class="is-loved"></span>
-                                <img src="${product.image}" alt="Image">
-                                <div class="name">${product.name}</div>
-                                <div class="price">${new Intl.NumberFormat().format(product.price)} VND</div>
-                                <button class="btn btn-primary add-to-cart">CHỌN SẢN PHẨM</button>
-                            </div>
-                        `);
-                    });
-                },
-                error: function(error) {
-                    console.error('Error to load data:', error);
-                }
-            });
-        });
-    });
-</script>
+<script src="js/user/hot_product.js"></script>

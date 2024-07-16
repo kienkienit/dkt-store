@@ -173,6 +173,12 @@ header a {
     .cart-text {
         display: none;
     }
+    .mid-top-header{
+        height: 1px;
+        background-color: white;
+        margin: 5px auto;
+        width: 75%;
+    }
 }
 
 @media (min-width: 769px) and (max-width: 992px) {

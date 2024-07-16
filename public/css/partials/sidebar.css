@@ -40,8 +40,17 @@
 .sidebar-item a:hover {
     background-color: #77ca64;
 }
-.dropdown-arrow {
+.sidebar-item > .dropdown-arrow {
     float: right;
+}
+.link-dropdown {
+    position: relative;
+}
+.link-dropdown > .dropdown-arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 .sidebar-item .dropdown-menu {
     display: none;

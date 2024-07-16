@@ -117,3 +117,43 @@
     color: #77ca64;
     display: inline-block;
 }
+@media (max-width: 992px) {
+    .content-container {
+        margin: 0 30px;
+    }
+    .register-page {
+        padding: 0 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        margin: 0 10px;
+    }
+    .register-page {
+        padding: 0 20px;
+    }
+    .btn-login {
+        width: 75%;
+    }
+}
+
+@media (max-width: 568px) {
+    .content-container {
+        margin: 0 5px;
+    }
+    .register-page {
+        padding: 0 5px;
+        display: flex;
+        flex-direction: column;
+    }
+    .register-part {
+        width: 100%;
+    }
+    .profit-part {
+        width: 100%;
+    }
+    .btn-login {
+        width: 50%;
+    }
+}

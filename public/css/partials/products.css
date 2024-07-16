@@ -28,7 +28,6 @@
 .middle-products {
     display: flex;
     align-items: center;
-    justify-content: space-between;
     flex-wrap: wrap;
 }
 .product-link:hover {
@@ -72,13 +71,23 @@
     color: white;
     border: 1px solid #77ca64;
 }
-
-@media (max-width: 992px) {
-    
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-
-@media (max-width: 768px) {
-    /* .category-menu {
-        display: none;
-    } */
+.page-item.active .page-link {
+    background-color: #77ca64; 
+    border-color: #77ca64; 
+    color: white; 
+}
+.page-item .page-link {
+    color: #77ca64; 
+    background-color: white; 
+    border: 1px solid #dee2e6; 
+}
+.page-item .page-link:hover {
+    color: white; 
+    background-color: #77ca64; 
+    border-color: #77ca64; 
 }

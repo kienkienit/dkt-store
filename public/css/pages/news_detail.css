@@ -17,7 +17,7 @@
     display: inline-block;
 }
 .news-container {
-    padding: 0 10%;
+    padding: 0;
 }
 .news-image {
     display: block;
@@ -31,4 +31,25 @@
 .posted-time {
     color: #8d8b8b;
     margin-bottom: 30px;
+}
+
+@media (max-width: 992px) {
+    .content-container {
+        margin: 0 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        margin: 0 25px;
+    }
+    .news-image {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .content-container {
+        margin: 0 10px;
+    }
 }
