@@ -15,6 +15,7 @@
     @include('partials.navbar')
     <div class="content-container">
         @yield('content')
+        Test process
     </div>
     @include('partials.footer')
 </body>
