@@ -37,11 +37,14 @@
     </div>
     <div class="bottom-header">
         <div class="left-bottom-header">
-            <div class="menu-icon">&#9776;</div>
+            <button class="navbar-toggler" onclick="toggleMenu()">
+                <div class="navbar-toggler-icon"></div>
+                <div class="navbar-toggler-icon"></div>
+                <div class="navbar-toggler-icon"></div>
+            </button>
             <a href="/" class="logo">
                 <img src="//bizweb.dktcdn.net/100/047/633/themes/887206/assets/logo.png?1676252851087" alt="DKT Store">
             </a>
-            <div class="secret-tag">&#9776;</div>
         </div>
         <div class="mid-bottom-header">
             <form action="/search" class="search-form">

@@ -20,11 +20,13 @@ header {
     display: flex;
     align-items: center;
     padding: 0 5px;
+    gap: 5px;
 }
 .email-support {
     display: flex;
     align-items: center;
     padding: 0 5px;
+    gap: 5px;
 }
 .right-top-header {
     display: flex;
@@ -42,6 +44,10 @@ header {
 }
 header a {
     color: white;
+    text-decoration: none;
+}
+.top-header a:hover {
+    color: #666;
     text-decoration: none;
 }
 .bottom-header {
@@ -112,6 +118,9 @@ header a {
 .right-bottom-header > * {
     padding: 0 5px;
 }
+.navbar-toggler {
+    display: none;
+}
 
 @media (max-width: 768px) {
     .top-header {
@@ -164,7 +173,6 @@ header a {
     .cart-text {
         display: none;
     }
-
 }
 
 @media (min-width: 769px) and (max-width: 992px) {
@@ -182,6 +190,11 @@ header a {
     }
     .cart-text {
         display: none;
+    }
+    .left-bottom-header {
+        display: flex;
+        align-items: center;
+        gap: 30px;
     }
 }
 
