@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Repositories\NewsRepository;
+use Illuminate\Support\Facades\Storage;
 
 class NewsService
 {
@@ -23,12 +24,12 @@ class NewsService
         return $this->newsRepository->findById($id);
     }
 
-    public function createNews(array $data)
+    public function createNews($data)
     {
         return $this->newsRepository->create($data);
     }
 
-    public function updateNews($id, array $data)
+    public function updateNews($id, $data)
     {
         return $this->newsRepository->update($id, $data);
     }

@@ -1,26 +1,23 @@
-.container {
-    margin: 0;
+.input-group-text {
+    background-color: white;
+    border: 1px solid #ced4da;
+    border-left: none;
 }
-.table thead th {
+.form-control {
+    border-right: none;
+}
+.table th, .table td {
     vertical-align: middle;
     text-align: center;
-}
-.table tbody td {
-    vertical-align: middle;
-    text-align: center;
-}
-.btn-search {
-    margin-top: 30px;
-}
-.btn-add-product {
-    float: right;
-    margin-bottom: 20px;
 }
 .btn-action {
     padding: 0.375rem 0.75rem;
     font-size: 0.875rem;
     line-height: 1.5;
     border-radius: 0.2rem;
+}
+.text-success {
+    color: #28a745 !important;
 }
 .option {
     display: flex;

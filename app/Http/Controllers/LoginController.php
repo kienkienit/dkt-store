@@ -28,7 +28,11 @@ class LoginController extends Controller
         $user = $this->userService->loginUser($validatedData);
 
         if ($user) {
-            return redirect()->route('home');
+            if ($user->role === 'admin') {
+                return redirect()->route('admin.manage.products');
+            } else {
+                return redirect()->route('home');
+            }
         }
 
         return back()->withErrors([

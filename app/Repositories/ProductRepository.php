@@ -50,4 +50,9 @@ class ProductRepository
         $product = $this->findById($id);
         return $product->delete();
     }
+
+    public function paginate($page, $perPage)
+    {
+        return $this->product->orderBy('created_at', 'desc')->paginate($perPage, ['*'], 'page', $page);
+    }
 }

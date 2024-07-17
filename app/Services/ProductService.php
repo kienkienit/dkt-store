@@ -56,4 +56,9 @@ class ProductService
         $minPrice = $this->productVariantRepository->getMinPriceByProductId($productId);
         $this->productRepository->update($productId, ['price' => $minPrice]);
     }
+
+    public function paginateProducts($page, $perPage = 10)
+    {
+        return $this->productRepository->paginate($page, $perPage);
+    }
 }
