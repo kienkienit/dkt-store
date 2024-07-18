@@ -16,7 +16,7 @@
         @foreach ($products as $index => $product)
             <tr>
                 <td>{{ $index + 1 }}</td>
-                <td><img src="{{ $product->image }}" alt="Product Image" class="img-fluid" style="max-width: 50px;"></td>
+                <td><img src="{{ $product->image }}" alt="Product Image" class="img-fluid"></td>
                 <td>{{ $product->name }}</td>
                 <td>{{ $product->total_sold_quantity }}</td>
                 <td>{{ $product->total_stock_quantity }}</td>

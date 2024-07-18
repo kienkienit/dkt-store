@@ -5,7 +5,7 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="top-container">
                 <h2>Danh Sách Biến Thể cho Sản Phẩm: {{ $product->name }}</h2>
                 <button class="btn btn-success btn-add-variant" data-toggle="modal" data-target="#addVariantModal">Thêm Biến Thể</button>
             </div>

@@ -27,3 +27,14 @@
     justify-content: center;
     gap: 5px;
 }
+.top-container {
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center;
+}
+.products-home-pagination {
+    margin-top: 10px;
+}
+td > .img-fluid {
+    max-width: 50px;
+}

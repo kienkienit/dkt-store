@@ -23,7 +23,7 @@
             </div>
         @endforeach
     </div>
-    <ul class="pagination" style="margin-top: 10px;"></ul>
+    <ul class="pagination products-home-pagination"></ul>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="js/user/products.js"></script>

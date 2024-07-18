@@ -15,7 +15,7 @@
         @foreach ($variants as $variant)
             <tr>
                 <td>{{ $variant->product->name }}</td>
-                <td><img src="{{ $variant->product->image }}" alt="Product Image" class="img-fluid" style="max-width: 50px;"></td>
+                <td><img src="{{ $variant->product->image }}" alt="Product Image" class="img-fluid"></td>
                 <td>{{ $variant->storage }}</td>
                 <td>{{ $variant->color }}</td>
                 <td>{{ $variant->sold_quantity }}</td>
