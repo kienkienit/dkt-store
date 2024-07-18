@@ -10,6 +10,7 @@
                 <a href="#" class="email-support">support@sapo.vn</a>
             </div>
         </div>
+        <div class="mid-top-header"></div>
         <div class="right-top-header">
             @guest
                 <div class="login">
@@ -37,11 +38,19 @@
     </div>
     <div class="bottom-header">
         <div class="left-bottom-header">
-            <div class="menu-icon">&#9776;</div>
+            <button class="navbar-toggler" onclick="toggleMenu()">
+                <div class="navbar-toggler-icon"></div>
+                <div class="navbar-toggler-icon"></div>
+                <div class="navbar-toggler-icon"></div>
+            </button>
             <a href="/" class="logo">
                 <img src="//bizweb.dktcdn.net/100/047/633/themes/887206/assets/logo.png?1676252851087" alt="DKT Store">
             </a>
-            <div class="secret-tag">&#9776;</div>
+            <button class="navbar-toggler none-button">
+                <div class="navbar-toggler-icon"></div>
+                <div class="navbar-toggler-icon"></div>
+                <div class="navbar-toggler-icon"></div>
+            </button>
         </div>
         <div class="mid-bottom-header">
             <form action="/search" class="search-form">
@@ -69,28 +78,4 @@
         </div>
     </div>
 </header>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const cartIcon = document.querySelector('.cart');
-    
-        if (cartIcon) {
-            cartIcon.addEventListener('click', function () {
-                fetch('/api/check-role')
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.authenticated && data.role === 'user') {
-                            window.location.href = '/user/cart';
-                        } else if (!data.authenticated) {
-                            window.location.href = '/login';
-                        } else {
-                            alert('Bạn không có quyền truy cập giỏ hàng.');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        window.location.href = '/login';
-                    });
-            });
-        }
-    });    
-</script>
+<script src="js/header.js"></script>

@@ -6,22 +6,21 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\DB;
 
-class CartRepository
+class CartRepository extends BaseRepository
 {
-    protected $cart;
     protected $cartItem;
 
     public function __construct(Cart $cart, CartItem $cartItem)
     {
-        $this->cart = $cart;
+        parent::__construct($cart);
         $this->cartItem = $cartItem;
     }
 
     public function createOrUpdateCart($userId, $data)
     {
-        $cart = Cart::firstOrCreate(['user_id' => $userId]);
+        $cart = $this->model->firstOrCreate(['user_id' => $userId]);
 
-        $cartItem = CartItem::where('cart_id', $cart->id)
+        $cartItem = $this->cartItem->where('cart_id', $cart->id)
             ->where('product_id', $data['product_id'])
             ->where('variant_id', $data['variant_id'])
             ->first();
@@ -30,7 +29,7 @@ class CartRepository
             $cartItem->quantity += $data['quantity'];
             $cartItem->save();
         } else {
-            $cartItem = CartItem::create([
+            $cartItem = $this->cartItem->create([
                 'cart_id' => $cart->id,
                 'product_id' => $data['product_id'],
                 'variant_id' => $data['variant_id'],
@@ -44,7 +43,7 @@ class CartRepository
 
     public function getCartByUserId($userId)
     {
-        return $this->cart->with('items')->where('user_id', $userId)->first();
+        return $this->model->with('items')->where('user_id', $userId)->first();
     }
 
     public function updateCartItemQuantity($itemId, $quantity)
@@ -79,7 +78,7 @@ class CartRepository
 
     public function deleteAllCartItems($userId)
     {
-        $cart = $this->cart->where('user_id', $userId)->first();
+        $cart = $this->model->where('user_id', $userId)->first();
 
         if ($cart) {
             $cart->items()->delete();
@@ -90,7 +89,6 @@ class CartRepository
 
     public function getUserCart($userId)
     {
-        return $this->cart->with('items.product', 'items.variant')->where('user_id', $userId)->first();
+        return $this->model->with('items.product', 'items.variant')->where('user_id', $userId)->first();
     }
 }
-

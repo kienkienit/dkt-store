@@ -118,18 +118,43 @@
     display: inline-block;
 }
 
+@media (max-width: 992px) {
+    .content-container {
+        margin: 0 30px;
+    }
+    .login-page {
+        padding: 0 30px;
+    }
+}
+
 @media (max-width: 768px) {
-    
+    .content-container {
+        margin: 0 10px;
+    }
+    .login-page {
+        padding: 0 20px;
+    }
+    .btn-register {
+        width: 75%;
+    }
 }
 
-@media (min-width: 769px) and (max-width: 992px) {
-
-}
-
-@media (min-width: 993px) and (max-width: 1200px) {
-
-}
-
-@media (min-width: 1201px) {
-
+@media (max-width: 568px) {
+    .content-container {
+        margin: 0 5px;
+    }
+    .login-page {
+        padding: 0 5px;
+        display: flex;
+        flex-direction: column;
+    }
+    .login-part {
+        width: 100%;
+    }
+    .profit-part {
+        width: 100%;
+    }
+    .btn-register {
+        width: 50%;
+    }
 }

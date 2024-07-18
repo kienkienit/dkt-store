@@ -3,20 +3,17 @@
 namespace App\Repositories;
 
 use App\Models\CartItem;
-use Illuminate\Support\Facades\DB;
 
-class CartItemRepository
+class CartItemRepository extends BaseRepository
 {
-    protected $cartItem;
-
     public function __construct(CartItem $cartItem)
     {
-        $this->cartItem = $cartItem;
+        parent::__construct($cartItem);
     }
 
     public function updateOrCreate($cartId, $productId, $variantId, $quantity, $price)
     {
-        return $this->cartItem->updateOrCreate(
+        return $this->model->updateOrCreate(
             ['cart_id' => $cartId, 'product_id' => $productId, 'variant_id' => $variantId],
             ['quantity' => $quantity, 'price' => $price]
         );
@@ -24,11 +21,11 @@ class CartItemRepository
 
     public function deleteByItemId($itemId)
     {
-        return $this->cartItem->where('id', $itemId)->delete();
+        return $this->model->where('id', $itemId)->delete();
     }
 
     public function deleteCartItemByProductId($productId)
     {
-        return $this->cartItem->where('product_id', $productId)->delete();
+        return $this->model->where('product_id', $productId)->delete();
     }
 }

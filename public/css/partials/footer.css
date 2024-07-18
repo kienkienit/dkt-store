@@ -21,3 +21,6 @@
     padding: 0;
     margin: 0;
 }
+.footer-container > .row {
+    margin: 0 auto;
+}

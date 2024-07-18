@@ -1,4 +1,4 @@
-<nav class="navbar">
+<nav class="navbar-container" id="navbar">
     <ul class="navbar-menu">
         <li class="navbar-item active"><a href="/">Trang Chủ</a></li>
         <li class="navbar-item"><a href="#">Giới Thiệu</a></li>
@@ -12,4 +12,5 @@
         </li>
         <li class="navbar-item"><a href="/news">Tin Tức</a></li>
         <li class="navbar-item"><a href="#">Liên Hệ</a></li>
+    </ul>
 </nav>

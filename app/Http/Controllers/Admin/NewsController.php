@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreNewsRequest;
 use Illuminate\Http\Request;
 use App\Services\NewsService;
-use Illuminate\Support\Facades\Log;
 
 class NewsController extends Controller
 {
@@ -19,8 +19,7 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $page = $request->input('page', 1);
-        $perPage = 5;
-        $news = $this->newsService->paginateNews($page, $perPage);
+        $news = $this->newsService->paginateNews($page);
 
         if ($request->ajax()) {
             return response()->json([
@@ -37,54 +36,26 @@ class NewsController extends Controller
         return response()->json($newsItem);
     }
 
-    public function store(Request $request)
+    public function store(StoreNewsRequest $request)
     {
-        try {
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'content' => 'required|string',
-                'published_date' => 'required|date',
-                'image' => 'required|string'
-            ]);
+        $data = $request->all();
+        $this->newsService->createNews($data);
 
-            $data = $request->all();
-            $this->newsService->createNews($data);
-
-            return response()->json(['success' => 'Tin tức đã được thêm thành công!']);
-        } catch (\Exception $e) {
-            Log::error('Error creating news: ' . $e->getMessage());
-            return response()->json(['error' => 'Có lỗi xảy ra khi thêm tin tức.'], 500);
-        }
+        return json_response(true, ['message' => 'Tin tức đã được thêm thành công!']);
     }
 
-    public function update(Request $request, $id)
+    public function update(StoreNewsRequest $request, $id)
     {
-        try {
-            $request->validate([
-                'title' => 'required|string|max:255',
-                'content' => 'required|string',
-                'published_date' => 'required|date',
-                'image' => 'required|string'
-            ]);
+        $data = $request->all();
+        $this->newsService->updateNews($id, $data);
 
-            $data = $request->all();
-            $this->newsService->updateNews($id, $data);
-
-            return response()->json(['success' => 'Tin tức đã được cập nhật thành công!']);
-        } catch (\Exception $e) {
-            Log::error('Error updating news: ' . $e->getMessage());
-            return response()->json(['error' => 'Có lỗi xảy ra khi cập nhật tin tức.'], 500);
-        }
+        return json_response(true, ['message' => 'Tin tức đã được cập nhật thành công!']);
     }
 
     public function delete($id)
     {
-        try {
-            $this->newsService->deleteNews($id);
-            return response()->json(['success' => 'Tin tức đã được xóa thành công!']);
-        } catch (\Exception $e) {
-            Log::error('Error deleting news: ' . $e->getMessage());
-            return response()->json(['error' => 'Có lỗi xảy ra khi xóa tin tức.'], 500);
-        }
+        $this->newsService->deleteNews($id);
+
+        return json_response(true, ['message' => 'Tin tức đã được xóa thành công!']);
     }
 }

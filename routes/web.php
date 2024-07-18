@@ -11,10 +11,10 @@ use App\Http\Controllers\User\ProductVariantController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
-use Illuminate\Routing\Route as RoutingRoute;
+use App\Http\Controllers\Admin\ProductVariantController as AdminProductVariantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,39 +80,37 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::prefix('products')->group(function () {
             Route::get('/', [AdminProductController::class, 'index'])->name('admin.manage.products');
             Route::post('/', [AdminProductController::class, 'store'])->name('admin.manage.products.create');
-            Route::get('/{id}', [AdminProductController::class, 'show']);
-            Route::post('/{id}', [AdminProductController::class, 'update']);
-            Route::delete('/{id}', [AdminProductController::class, 'delete']);
-        });
-        Route::prefix('product_variants')->group(function () {
-            Route::get('/', [ProductVariantController::class, 'index']);
-            Route::get('/{id}', [ProductVariantController::class, 'show']);
-            Route::post('update', [ProductVariantController::class, 'update']);
-            Route::delete('delete', [ProductVariantController::class, 'delete']);
+            Route::get('/{id}', [AdminProductController::class, 'show'])->name('admin.manage.products.show');
+            Route::post('/{id}', [AdminProductController::class, 'update'])->name('admin.manage.products.update');
+            Route::delete('/{id}', [AdminProductController::class, 'delete'])->name('admin.manage.products.delete');
+
+            Route::prefix('{product_id}/variants')->group(function () {
+                Route::get('/', [AdminProductVariantController::class, 'index'])->name('admin.manage.product_variants');
+                Route::post('/', [AdminProductVariantController::class, 'store'])->name('admin.manage.product_variants.create');
+                Route::get('/{variant_id}', [AdminProductVariantController::class, 'show'])->name('admin.manage.product_variants.show');
+                Route::post('/{variant_id}', [AdminProductVariantController::class, 'update'])->name('admin.manage.product_variants.update');
+                Route::delete('/{variant_id}', [AdminProductVariantController::class, 'delete'])->name('admin.manage.product_variants.delete');
+            });
         });
         Route::prefix('orders')->group(function () {
             Route::get('/', [OrderController::class, 'index'])->name('admin.manage.orders');
-            Route::get('/{id}', [OrderController::class, 'show']);
-            Route::post('update', [OrderController::class, 'update']);
-            Route::delete('delete', [OrderController::class, 'delete']);
+            Route::get('/{id}', [OrderController::class, 'show'])->name('admin.manage.orders.show');
+            Route::post('update', [OrderController::class, 'update'])->name('admin.manage.orders.update');
+            Route::delete('delete', [OrderController::class, 'delete'])->name('admin.manage.orders.delete');
         });
         Route::prefix('users')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('admin.manage.users');
             Route::post('/', [UserController::class, 'store'])->name('admin.manage.users.create');
-            Route::get('/{id}', [UserController::class, 'show']);
-            Route::post('/{id}', [UserController::class, 'update']);
-            Route::delete('/{id}', [UserController::class, 'delete']);
+            Route::get('/{id}', [UserController::class, 'show'])->name('admin.manage.users.show');
+            Route::post('/{id}', [UserController::class, 'update'])->name('admin.manage.users.update');
+            Route::delete('/{id}', [UserController::class, 'delete'])->name('admin.manage.users.delete');
         });
         Route::prefix('news')->group(function () {
             Route::get('/', [AdminNewsController::class, 'index'])->name('admin.manage.news');
             Route::post('/', [AdminNewsController::class, 'store'])->name('admin.manage.news.create');
-            Route::get('/{id}', [AdminNewsController::class, 'show']);
-            Route::post('/{id}', [AdminNewsController::class, 'update']);
-            Route::delete('/{id}', [AdminNewsController::class, 'delete']);
+            Route::get('/{id}', [AdminNewsController::class, 'show'])->name('admin.manage.news.show');
+            Route::post('/{id}', [AdminNewsController::class, 'update'])->name('admin.manage.news.update');
+            Route::delete('/{id}', [AdminNewsController::class, 'delete'])->name('admin.manage.news.delete');
         });
     });
-});
-
-Route::get('/news', function () {
-    return view('admin.manage_news');
 });

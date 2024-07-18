@@ -23,29 +23,31 @@
                 <div class="variants">
                     <div class="variant">
                         <div class="title">Chọn màu sắc:</div>
-                        <select id="color-select" class="form-control">
+                        <div id="color-buttons">
                             @foreach($product->variants->unique('color') as $variant)
-                                <option value="{{ $variant->color }}" 
+                                <button class="color-button btn btn-outline-primary"
+                                        data-color="{{ $variant->color }}" 
                                         data-price="{{ $variant->price }}" 
                                         data-storage="{{ $variant->storage }}" 
                                         data-variant-id="{{ $variant->id }}">
                                     {{ $variant->color }}
-                                </option>
+                                </button>
                             @endforeach
-                        </select>
+                        </div>
                     </div>
                     <div class="variant">
                         <div class="title">Chọn dung lượng:</div>
-                        <select id="storage-select" class="form-control">
+                        <div id="storage-buttons">
                             @foreach($product->variants->unique('storage') as $variant)
-                                <option value="{{ $variant->storage }}" 
+                                <button class="storage-button btn btn-outline-primary"
+                                        data-storage="{{ $variant->storage }}" 
                                         data-price="{{ $variant->price }}" 
                                         data-color="{{ $variant->color }}" 
                                         data-variant-id="{{ $variant->id }}">
                                     {{ $variant->storage }}
-                                </option>
+                                </button>
                             @endforeach
-                        </select>
+                        </div>
                     </div>
                 </div>
                 <div class="quantity">

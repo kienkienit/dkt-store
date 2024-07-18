@@ -21,17 +21,14 @@
 .hot-item > a:hover {
     text-decoration: none;
     background-color: #77ca64;
-    font-weight: bold;
 }
 .hot-item.active a {
     background-color: #77ca64;
-    font-weight: bold;
 }
 .middle-hot-products {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: calc((100% - 1000px)/3);
 }
 .product-link:hover {
     text-decoration: none;
@@ -42,7 +39,8 @@
     align-items: center;
     padding-top: 2px;
     border: 1px solid #dbd6d6;
-    width: 250px;
+    width: 100%;
+    margin: 0 auto;
 }
 .product-item > .name {
     text-align: center;
@@ -71,4 +69,17 @@
     background-color: #77ca64;
     color: white;
     border: 1px solid #77ca64;
+}
+.is-loved {
+    display: none;
+}
+
+@media (max-width: 992px) {
+    
+}
+
+@media (max-width: 768px) {
+    .hot-menu {
+        display: none;
+    }
 }

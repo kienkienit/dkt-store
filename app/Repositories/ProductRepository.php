@@ -4,55 +4,27 @@ namespace App\Repositories;
 
 use App\Models\Product;
 
-class ProductRepository
+class ProductRepository extends BaseRepository
 {
-    protected $product;
+    const PER_PAGE = 5;
 
     public function __construct(Product $product)
     {
-        $this->product = $product;
+        parent::__construct($product);
     }
 
-    public function getAll()
+    public function paginate($page, $perPage = self::PER_PAGE)
     {
-        return $this->product->get();
-    }
-
-    public function findById($id)
-    {
-        return $this->product->find($id);
+        return parent::paginate($page, self::PER_PAGE);
     }
 
     public function getProductsByCategory($categoryId, $perPage = 8)
     {
-        return $this->product->where('category_id', $categoryId)->paginate($perPage);
+        return $this->model->where('category_id', $categoryId)->paginate($perPage);
     }
 
     public function getHotProductsByCategory($categoryId)
     {
-        return $this->product->where('category_id', $categoryId)->orderBy('created_at', 'desc')->get();
-    }
-
-    public function create(array $data)
-    {
-        return $this->product->create($data);
-    }
-
-    public function update($id, array $data)
-    {
-        $product = $this->findById($id);
-        $product->update($data);
-        return $product;
-    }
-
-    public function delete($id)
-    {
-        $product = $this->findById($id);
-        return $product->delete();
-    }
-
-    public function paginate($page, $perPage)
-    {
-        return $this->product->orderBy('created_at', 'desc')->paginate($perPage, ['*'], 'page', $page);
+        return $this->model->where('category_id', $categoryId)->orderBy('created_at', 'desc')->get();
     }
 }

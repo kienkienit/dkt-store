@@ -40,8 +40,17 @@
 .sidebar-item a:hover {
     background-color: #77ca64;
 }
-.dropdown-arrow {
+.sidebar-item > .dropdown-arrow {
     float: right;
+}
+.link-dropdown {
+    position: relative;
+}
+.link-dropdown > .dropdown-arrow {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 .sidebar-item .dropdown-menu {
     display: none;
@@ -73,4 +82,10 @@
 .sidebar-item a.dropdown-toggle.active {
     background-color: #77ca64;
     color: white;
+}
+
+@media (max-width: 992px) {
+    .sidebar {
+        display: none;
+    }
 }

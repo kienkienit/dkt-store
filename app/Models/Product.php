@@ -28,4 +28,19 @@ class Product extends Model
     {
         return $this->hasMany(CartItem::class);
     }
+
+    public function getTotalSoldQuantityAttribute()
+    {
+        return $this->variants->sum('sold_quantity');
+    }
+
+    public function getTotalStockQuantityAttribute()
+    {
+        return $this->variants->sum('stock_quantity');
+    }
+
+    public function getFirstVariantPriceAttribute()
+    {
+        return $this->variants->first()->price ?? 0;
+    }
 }

@@ -5,72 +5,95 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div class="" style="display: flex; justify-content: space-between">
-                <h2>Danh Sách Biến Thể </h2>
-                <button class="btn btn-success btn-add-product">Thêm biến thể </button>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Danh Sách Biến Thể cho Sản Phẩm: {{ $product->name }}</h2>
+                <button class="btn btn-success btn-add-variant" data-toggle="modal" data-target="#addVariantModal">Thêm Biến Thể</button>
             </div>
-            <a href="#" class="link-to-products">Danh Sách Sản Phẩm</a>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Tên sản phẩm</th>
-                        <th>Ảnh</th>
-                        <th>Dung lượng</th>
-                        <th>Màu sắc</th>
-                        <th>Số lượng đã bán</th>
-                        <th>Số lượng còn lại</th>
-                        <th>Giá</th>
-                        <th>Option</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Xiaomi 14 5G</td>
-                        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRagl6UY6YrAhpj3yScbqoakN7L5eg_zpcWqg&s" alt="Product Image" class="img-fluid" style="max-width: 50px;"></td>
-                        <td>256GB</td>
-                        <td>Black</td>
-                        <td>25</td>
-                        <td>35</td>
-                        <td>40.000.000</td>
-                        <td>
-                            <div class="option">
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Xiaomi 14 5G</td>
-                        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRagl6UY6YrAhpj3yScbqoakN7L5eg_zpcWqg&s" alt="Product Image" class="img-fluid" style="max-width: 50px;"></td>
-                        <td>256GB</td>
-                        <td>Black</td>
-                        <td>25</td>
-                        <td>35</td>
-                        <td>40.000.000</td>
-                        <td>
-                            <div class="option">
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Xiaomi 14 5G</td>
-                        <td><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRagl6UY6YrAhpj3yScbqoakN7L5eg_zpcWqg&s" alt="Product Image" class="img-fluid" style="max-width: 50px;"></td>
-                        <td>256GB</td>
-                        <td>Black</td>
-                        <td>25</td>
-                        <td>35</td>
-                        <td>40.000.000</td>
-                        <td>
-                            <div class="option">
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-danger btn-sm"><i class="fas fa-trash-alt"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <a href="{{ route('admin.manage.products') }}" class="link-to-products">Danh Sách Sản Phẩm</a>
+            <div id="variants-content">
+                @include('partials-admin.product_variants', ['variants' => $variants])
+            </div>
         </div>
     </div>
+
+    <!-- Add Variant Modal -->
+    <div class="modal fade" id="addVariantModal" tabindex="-1" role="dialog" aria-labelledby="addVariantModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addVariantModalLabel">Thêm Biến Thể</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="addVariantForm">
+                        <input type="hidden" id="product_id" name="product_id" value="{{ $product->id }}">
+                        <div class="form-group">
+                            <label for="storage">Dung Lượng</label>
+                            <input type="text" class="form-control" id="storage" name="storage" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="color">Màu Sắc</label>
+                            <input type="text" class="form-control" id="color" name="color" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Giá</label>
+                            <input type="number" class="form-control" id="price" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="stock_quantity">Số Lượng Còn Lại</label>
+                            <input type="number" class="form-control" id="stock_quantity" name="stock_quantity" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Lưu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Variant Modal -->
+    <div class="modal fade" id="editVariantModal" tabindex="-1" role="dialog" aria-labelledby="editVariantModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editVariantModalLabel">Chỉnh Sửa Biến Thể</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editVariantForm">
+                        <input type="hidden" id="edit_variant_id" name="variant_id">
+                        <div class="form-group">
+                            <label for="edit_storage">Dung Lượng</label>
+                            <input type="text" class="form-control" id="edit_storage" name="storage" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_color">Màu Sắc</label>
+                            <input type="text" class="form-control" id="edit_color" name="color" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_price">Giá</label>
+                            <input type="number" class="form-control" id="edit_price" name="price" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_stock_quantity">Số Lượng Còn Lại</label>
+                            <input type="number" class="form-control" id="edit_stock_quantity" name="stock_quantity" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var productId = "{{ $product->id }}";
+        var fetchVariantsUrl = "/admin/manage/products/" + productId + "/variants";
+        var addVariantUrl = "/admin/manage/products/" + productId + "/variants";
+        var updateVariantUrl = "/admin/manage/products/" + productId + "/variants";
+        var deleteVariantUrl = "/admin/manage/products/" + productId + "/variants";
+    </script>
+    <script src="{{ asset('js/admin/manage_product_variants.js') }}"></script>
 @endsection

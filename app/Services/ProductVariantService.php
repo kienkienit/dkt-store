@@ -17,6 +17,10 @@ class ProductVariantService
     {
         return $this->productVariantRepository->create($data);
     }
+    public function getVariantById($id)
+    {
+        return $this->productVariantRepository->findById($id);
+    }
 
     public function updateVariant($id, array $data)
     {
@@ -31,5 +35,10 @@ class ProductVariantService
     public function getMinPriceByProductId($productId)
     {
         return $this->productVariantRepository->getMinPriceByProductId($productId);
+    }
+
+    public function paginateVariants($productId, $page)
+    {
+        return $this->productVariantRepository->paginate($productId, $page);
     }
 }

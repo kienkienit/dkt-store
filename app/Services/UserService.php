@@ -19,6 +19,7 @@ class UserService
     {
         $data['password'] = Hash::make($data['password']);
         $data['role'] = 'user';
+        
         return $this->userRepository->create($data);
     }
 
@@ -31,9 +32,9 @@ class UserService
         return null;
     }
 
-    public function paginateUsers($page, $perPage = 10)
+    public function paginateUsers($page)
     {
-        return $this->userRepository->paginate($page, $perPage);
+        return $this->userRepository->paginate($page);
     }
 
     public function getAllUsers()

@@ -44,8 +44,8 @@ class NewsService
         return $this->newsRepository->getLatestNews();
     }
 
-    public function paginateNews($page, $perPage = 5)
+    public function paginateNews($page)
     {
-        return $this->newsRepository->paginate($page, $perPage);
+        return $this->newsRepository->paginate($page);
     }
 }

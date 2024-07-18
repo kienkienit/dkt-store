@@ -80,3 +80,20 @@
     border: 1px solid #77ca64;
     color: #77ca64;
 }
+.form-group span {
+    color: red;
+}
+@media (max-width: 992px) {
+    .content-container {
+        margin: 0 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        margin: 0 10px;
+    }
+    .order-info form {
+        width: 400px;
+    }
+}

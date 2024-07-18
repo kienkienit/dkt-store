@@ -25,3 +25,12 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
+@media (max-width: 992px) {
+    .support-container {
+        width: 100%;
+    }
+    .support-title {
+        text-align: left;
+    }
+}

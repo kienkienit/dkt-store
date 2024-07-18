@@ -18,8 +18,8 @@
                 <td>{{ $index + 1 }}</td>
                 <td><img src="{{ $product->image }}" alt="Product Image" class="img-fluid" style="max-width: 50px;"></td>
                 <td>{{ $product->name }}</td>
-                <td>{{ $product->sold_quantity }}</td>
-                <td>{{ $product->remaining_quantity }}</td>
+                <td>{{ $product->total_sold_quantity }}</td>
+                <td>{{ $product->total_stock_quantity }}</td>
                 <td>{{ $product->category->name }}</td>
                 <td>{{ $product->created_at->format('d-m-Y') }}</td>
                 <td>{{ $product->updated_at->format('d-m-Y') }}</td>
@@ -27,7 +27,7 @@
                     <div class="option">
                         <button class="btn btn-info btn-sm btn-edit" data-id="{{ $product->id }}"><i class="fas fa-edit"></i></button>
                         <button class="btn btn-danger btn-sm btn-delete" data-id="{{ $product->id }}"><i class="fas fa-trash-alt"></i></button>
-                        <button class="btn btn-primary btn-sm btn-action"><i class="fas fa-info-circle"></i></button>
+                        <button class="btn btn-primary btn-sm btn-variants" data-id="{{ $product->id }}"><i class="fas fa-info-circle"></i></button>
                     </div>
                 </td>
             </tr>
