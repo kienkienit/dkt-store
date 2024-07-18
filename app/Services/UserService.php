@@ -19,6 +19,7 @@ class UserService
     {
         $data['password'] = Hash::make($data['password']);
         $data['role'] = 'user';
+        
         return $this->userRepository->create($data);
     }
 
@@ -29,5 +30,41 @@ class UserService
         }
         
         return null;
+    }
+
+    public function paginateUsers($page)
+    {
+        return $this->userRepository->paginate($page);
+    }
+
+    public function getAllUsers()
+    {
+        return $this->userRepository->getAll();
+    }
+
+    public function getUserById($id)
+    {
+        return $this->userRepository->findById($id);
+    }
+
+    public function createUser(array $data)
+    {
+        $data['password'] = Hash::make($data['password']);
+        return $this->userRepository->create($data);
+    }
+
+    public function updateUser($id, array $data)
+    {
+        if (isset($data['password'])) {
+            $data['password'] = Hash::make($data['password']);
+        } else {
+            unset($data['password']);
+        }
+        return $this->userRepository->update($id, $data);
+    }
+
+    public function deleteUser($id)
+    {
+        return $this->userRepository->delete($id);
     }
 }

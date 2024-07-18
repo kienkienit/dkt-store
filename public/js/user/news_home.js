@@ -2,17 +2,16 @@ $(document).ready(function(){
     const showLimitLarge = 4;
     const showLimitMedium = 3;
     const showLimitSmall = 2;
-    // const showLimit = 4;
     let currentPage = 1;
     const news = window.newsData;
 
     function getShowLimit() {
         const width = $(window).width();
-        if (width >= 992) { // Large screens
+        if (width >= 992) {
             return showLimitLarge;
-        } else if (width >= 768) { // Medium screens
+        } else if (width >= 768) {
             return showLimitMedium;
-        } else { // Small screens
+        } else {
             return showLimitSmall;
         }
     }

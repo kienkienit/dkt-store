@@ -4,36 +4,22 @@ namespace App\Repositories;
 
 use App\Models\ProductVariant;
 
-class ProductVariantRepository
+class ProductVariantRepository extends BaseRepository
 {
-    protected $productVariant;
+    const PER_PAGE = 5;
 
     public function __construct(ProductVariant $productVariant)
     {
-        $this->productVariant = $productVariant;
-    }
-
-    public function create(array $data)
-    {
-        return $this->productVariant->create($data);
-    }
-
-    public function update($id, array $data)
-    {
-        $variant = $this->productVariant->find($id);
-        $variant->update($data);
-        return $variant;
-    }
-
-    public function delete($id)
-    {
-        $variant = $this->productVariant->find($id);
-        $variant->delete();
-        return $variant;
+        parent::__construct($productVariant);
     }
 
     public function getMinPriceByProductId($productId)
     {
-        return $this->productVariant->where('product_id', $productId)->min('price');
+        return $this->model->where('product_id', $productId)->min('price');
+    }
+
+    public function paginate($productId, $page)
+    {
+        return $this->model->where('product_id', $productId)->orderBy('created_at', 'desc')->paginate(self::PER_PAGE, ['*'], 'page', $page);
     }
 }

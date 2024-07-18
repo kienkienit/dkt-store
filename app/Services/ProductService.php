@@ -51,9 +51,8 @@ class ProductService
         return $this->productRepository->delete($id);
     }
 
-    protected function updateProductPrice($productId)
+    public function paginateProducts($page)
     {
-        $minPrice = $this->productVariantRepository->getMinPriceByProductId($productId);
-        $this->productRepository->update($productId, ['price' => $minPrice]);
+        return $this->productRepository->paginate($page);
     }
 }

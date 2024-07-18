@@ -1,0 +1,66 @@
+.admin-sidebar {
+    background-color: white;
+    color: #77ca64;
+    height: 100%;
+    padding-top: 20px;
+    width: 250px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+.admin-manage {
+    font-weight: bold;
+    color: #333;
+    font-size: 25px;
+    text-align: center;
+    padding: 10px 20px;
+    border: 1px solid #77ca64;
+    background-color: #f8f4f4;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.admin-sidebar ul {
+    list-style: none;
+    padding: 0;
+    background-color: #f8f4f4;
+    border: 1px solid #77ca64;
+    border-radius: 20px;
+    margin-top: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.admin-sidebar li {
+    padding: 10px 20px;
+}
+.admin-sidebar a {
+    color: #77ca64;
+    text-decoration: none;
+    font-size: 20px;
+}
+.admin-sidebar li:hover {
+    background-color: #77ca64;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}
+.admin-sidebar li:hover > a {
+    color: white;
+    text-decoration: none;
+}
+.admin-sidebar .manage-list .active a {
+    color: white;
+}
+.admin-sidebar .manage-list > .active {
+    background-color: #77ca64;
+    border-radius: 20px;
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    -ms-border-radius: 20px;
+    -o-border-radius: 20px;
+}

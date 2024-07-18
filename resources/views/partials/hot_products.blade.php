@@ -26,4 +26,4 @@
     </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="js/user/hot_product.js"></script>
+<script src="js/user/hot_products.js"></script>
