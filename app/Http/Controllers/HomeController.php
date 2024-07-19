@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Services\CategoryService;
 use App\Services\ProductService;
 use App\Services\NewsService;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {

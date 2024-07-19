@@ -5,7 +5,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterUserRequest;
 use App\Services\UserService;
-use Illuminate\Http\Request;
 
 class RegisterController extends Controller 
 {

@@ -24,6 +24,7 @@
 }
 .header-product-detail-container {
     display: flex;
+    justify-content: center;
 }
 .product-image{
     padding-right: 30px;

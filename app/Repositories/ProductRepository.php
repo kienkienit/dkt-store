@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
 
 class ProductRepository extends BaseRepository
 {
@@ -26,5 +27,25 @@ class ProductRepository extends BaseRepository
     public function getHotProductsByCategory($categoryId)
     {
         return $this->model->where('category_id', $categoryId)->orderBy('created_at', 'desc')->get();
+    }
+
+    public function getBestSellers()
+    {
+        return $this->model->select('products.*', DB::raw('SUM(order_details.quantity) as total_quantity'))
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->groupBy('products.id')
+            ->orderBy('total_quantity', 'desc')
+            ->limit(10)
+            ->get();
+    }
+
+    public function getTopRevenue()
+    {
+        return $this->model->select('products.*', DB::raw('SUM(order_details.quantity * order_details.price) as total_revenue'))
+            ->join('order_details', 'products.id', '=', 'order_details.product_id')
+            ->groupBy('products.id')
+            ->orderBy('total_revenue', 'desc')
+            ->limit(10)
+            ->get();
     }
 }

@@ -10,6 +10,7 @@ use App\Http\Controllers\User\ProductController;
 use App\Http\Controllers\User\ProductVariantController;
 use App\Http\Controllers\User\CartController;
 use App\Http\Controllers\User\OrderController;
+use App\Http\Controllers\Admin\StatisticsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
@@ -113,5 +114,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
             Route::post('/{id}', [AdminNewsController::class, 'update'])->name('admin.manage.news.update');
             Route::delete('/{id}', [AdminNewsController::class, 'delete'])->name('admin.manage.news.delete');
         });
+    });
+    Route::prefix('statistics')->group(function () {
+        Route::get('/', [StatisticsController::class, 'index'])->name('admin.statistics.index');
+        Route::get('/revenue/{year}', [StatisticsController::class, 'getRevenueByMonth'])->name('admin.statistics.revenue');
+        Route::get('/orders/{year}', [StatisticsController::class, 'getOrdersByMonth'])->name('admin.statistics.orders');
     });
 });
