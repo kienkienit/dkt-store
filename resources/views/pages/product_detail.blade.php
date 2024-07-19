@@ -70,6 +70,7 @@
                 @else
                     <a href="{{ route('login') }}" class="btn btn-primary add-to-cart">Đăng nhập để thêm vào giỏ hàng</a>
                 @endauth
+                <div id="stock-alert"></div>
             </div>
         </div>
     </div>

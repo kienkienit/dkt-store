@@ -41,4 +41,14 @@ class ProductVariantService
     {
         return $this->productVariantRepository->paginate($productId, $page);
     }
+
+    public function updateInventory($variantId, $quantity)
+    {
+        $variant = $this->productVariantRepository->findById($variantId);
+        if ($variant) {
+            $variant->sold_quantity += $quantity;
+            $variant->stock_quantity -= $quantity;
+            $variant->save();
+        }
+    }
 }

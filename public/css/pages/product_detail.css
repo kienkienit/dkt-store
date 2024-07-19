@@ -126,6 +126,12 @@
     background-color: #77ca64;
     color: white;
 }
+.stock-alert {
+    display: none; 
+    color: red; 
+    margin-top: 10px;
+    background-color: #77ca64;
+}
 
 @media (max-width: 992px) {
     .content-container {

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
     const productPrice = document.getElementById('product-price');
     const subtractButton = document.querySelector('.subtract');
     const addButton = document.querySelector('.add');
@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let selectedColor = null;
     let selectedStorage = null;
 
-    function updatePrice() {
+    function updatePriceAndAvailability() {
         if (selectedColor && selectedStorage) {
             const selectedVariant = variants.find(variant =>
                 variant.color === selectedColor && variant.storage === selectedStorage
@@ -31,6 +31,18 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (variantPriceInput) {
                     variantPriceInput.value = price;
                 }
+                if (selectedVariant.stock_quantity > 0) {
+                    addToCartForm.querySelector('button[type="submit"]').disabled = false;
+                    document.getElementById('stock-alert').style.display = 'none';
+                } else {
+                    addToCartForm.querySelector('button[type="submit"]').disabled = true;
+                    document.getElementById('stock-alert').textContent = 'Sản phẩm đã hết hàng';
+                    document.getElementById('stock-alert').style.display = 'block';
+                }
+            } else {
+                addToCartForm.querySelector('button[type="submit"]').disabled = true;
+                document.getElementById('stock-alert').textContent = 'Không tồn tại sản phẩm này';
+                document.getElementById('stock-alert').style.display = 'block';
             }
         }
     }
@@ -58,7 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             button.classList.add('active');
             selectedColor = button.getAttribute('data-color');
-            updatePrice();
+            updatePriceAndAvailability();
         });
     });
 
@@ -69,12 +81,12 @@ document.addEventListener('DOMContentLoaded', function () {
             });
             button.classList.add('active');
             selectedStorage = button.getAttribute('data-storage');
-            updatePrice();
+            updatePriceAndAvailability();
         });
     });
 
     if (subtractButton) {
-        subtractButton.addEventListener('click', function () {
+        subtractButton.addEventListener('click', function() {
             if (quantity > 1) {
                 quantity--;
                 updateQuantityDisplay();
@@ -83,17 +95,15 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     if (addButton) {
-        addButton.addEventListener('click', function () {
+        addButton.addEventListener('click', function() {
             quantity++;
             updateQuantityDisplay();
         });
     }
 
-    addToCartForm.addEventListener('submit', function (e) {
+    addToCartForm.addEventListener('submit', function(e) {
         e.preventDefault();
         const formData = new FormData(addToCartForm);
-
-        console.log('Form Data:', Array.from(formData.entries()));
 
         fetch(addToCartForm.action, {
             method: 'POST',
@@ -104,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(response => response.json())
         .then(data => {
-            console.log('Server Response:', data);
             if (data.success) {
                 cartAlert.style.display = 'block';
                 setTimeout(() => {
@@ -123,6 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
     selectFirstButton(document.querySelectorAll('.color-button'));
     selectFirstButton(document.querySelectorAll('.storage-button'));
 
-    updatePrice();
+    updatePriceAndAvailability();
     updateQuantityDisplay();
 });

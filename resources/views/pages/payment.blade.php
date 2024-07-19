@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         @foreach($cart->items as $item)
-                            <tr data-product-id="{{ $item->product->id }}">
+                            <tr data-product-id="{{ $item->product->id }}" data-variant-id={{ $item->variant->id }}>
                                 <td><img src="{{ $item->product->image }}" alt="Image"></td>
                                 <td>{{ $item->product->name }}</td>
                                 <td>{{ $item->quantity }}</td>

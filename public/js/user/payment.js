@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         document.querySelectorAll('.cart-detail tbody tr').forEach(row => {
             const productId = row.getAttribute('data-product-id');
+            const variantId = row.getAttribute('data-variant-id');
             const productNameCell = row.cells[1];
             const productName = productNameCell ? productNameCell.textContent : '';
             const quantityCell = row.cells[2];
@@ -20,6 +21,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (!isNaN(quantity) && quantity > 0 && !isNaN(price) && price > 0) {
                 const product = {
                     product_id: productId,
+                    variant_id: variantId,
                     name: productName,
                     quantity: quantity,
                     price: price
