@@ -31,10 +31,12 @@ class OrderController extends Controller
             'total_amount'
         ]);
 
-        $data['user_id'] = auth()->id();
-        $data['items'] = $items;
-        $data['order_date'] = now();
-        $data['status'] = 'pending';
+        $data += [
+            'user_id' => auth()->id(),
+            'items' => $items,
+            'order_date' => now(),
+            'status' => 'pending'
+        ];
 
         $order = $this->orderService->placeOrder($data);
 
