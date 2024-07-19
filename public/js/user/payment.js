@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
     const form = document.getElementById("order-form");
+    const submitButton = document.querySelector(".btn-order");
 
     form.addEventListener("submit", function(event) {
         event.preventDefault();
@@ -32,9 +33,25 @@ document.addEventListener("DOMContentLoaded", function() {
             }
         });
 
+        if (items.length === 0) {
+            alert('Không có sản phẩm nào trong giỏ hàng.');
+            return;
+        }
+
         document.getElementById("items").value = JSON.stringify(items);
         document.getElementById("total_amount").value = totalAmount;
 
         form.submit();
     });
+
+    function checkCartItems() {
+        const items = document.querySelectorAll('.cart-detail tbody tr');
+        if (items.length === 0) {
+            submitButton.disabled = true;
+        } else {
+            submitButton.disabled = false;
+        }
+    }
+
+    checkCartItems();
 });

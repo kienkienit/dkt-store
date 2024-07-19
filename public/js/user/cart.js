@@ -124,6 +124,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const payButton = document.querySelector('.pay');
     payButton.addEventListener('click', function () {
-        window.location.href = "/user/payment";
+        const items = document.querySelectorAll('.cart-detail tbody tr');
+        if (items.length === 0 || (items.length === 1 && items[0].querySelector('td').colSpan === 6)) {
+            alert('Giỏ hàng của bạn trống. Vui lòng thêm sản phẩm trước khi thanh toán.');
+        } else {
+            window.location.href = "/user/payment";
+        }
     });
+
+    function checkCartItems() {
+        const items = document.querySelectorAll('.cart-detail tbody tr');
+        const payButton = document.querySelector('.pay');
+        const removeAllButton = document.querySelector('.remove-all');
+        if (items.length === 0 || (items.length === 1 && items[0].querySelector('td').colSpan === 6)) {
+            payButton.disabled = true;
+            removeAllButton.disabled = true;
+        } else {
+            payButton.disabled = false;
+            removeAllButton.disabled = false;
+        }
+    }
+
+    checkCartItems();
 });
