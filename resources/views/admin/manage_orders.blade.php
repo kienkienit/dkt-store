@@ -7,16 +7,18 @@
         <div class="container">
             <div class="row mb-4 align-items-end">
                 <div class="col-md-5">
-                    <label for="productType">Trang thai don hang</label>
-                    <select class="form-control" id="productType">
+                    <label for="orderStatus">Trạng thái đơn hàng</label>
+                    <select class="form-control" id="orderStatus">
                         <option>Tất cả</option>
-                        <option>Oppo</option>
-                        <option>Samsung</option>
-                        <option>Apple</option>
+                        <option value="pending">Chờ xử lý</option>
+                        <option value="processing">Đang xử lý</option>
+                        <option value="shipped">Đã giao</option>
+                        <option value="delivered">Đã nhận</option>
+                        <option value="cancelled">Đã hủy</option>
                     </select>
                 </div>
                 <div class="col-md-5">
-                    <label for="productName">Ma don hang:</label>
+                    <label for="productName">Mã đơn hàng:</label>
                     <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
                 </div>
             </div>
@@ -42,90 +44,65 @@
             </div>
             <button class="btn btn-primary btn-search">Tìm kiếm</button>
             <h2>Danh Sách Đơn Hàng</h2>
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>STT</th>
-                        <th>Mã đơn hàng</th>
-                        <th>Người mua</th>
-                        <th>Trạng thái</th>
-                        <th>Tổng tiền (VND)</th>
-                        <th>Ngày đặt</th>
-                        <th>Cập nhật</th>
-                        <th>Option</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>8021481</td>
-                        <td>emever</td>
-                        <td class="text-success">Giao hàng thành công</td>
-                        <td>47.047.684</td>
-                        <td>06-05-2024 18:34:56</td>
-                        <td>06-05-2024 21:23:04</td>
-                        <td>
-                            <div class="option">
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2612804</td>
-                        <td>systemadmin</td>
-                        <td class="text-success">Giao hàng thành công</td>
-                        <td>7.341.076</td>
-                        <td>06-05-2024 18:15:41</td>
-                        <td>06-05-2024 21:23:06</td>
-                        <td>
-                            <div class="option">
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>7522201</td>
-                        <td>dat123</td>
-                        <td class="text-success">Giao hàng thành công</td>
-                        <td>3.234.079</td>
-                        <td>06-05-2024 17:34:12</td>
-                        <td>06-05-2024 21:23:08</td>
-                        <td>
-                            <div class="option">
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>6054055</td>
-                        <td>ANguyenVan</td>
-                        <td class="text-success">Giao hàng thành công</td>
-                        <td>6.823.393</td>
-                        <td>06-05-2024 04:21:37</td>
-                        <td>06-05-2024 21:23:10</td>
-                        <td>
-                            <div class="option">
-                                <a href="#" class="btn btn-info btn-sm"><i class="fas fa-edit"></i></a>
-                                <a href="#" class="btn btn-primary btn-sm"><i class="fas fa-info-circle"></i></a>
-                            </div>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div id="orders-content">
+                @include('partials-admin.orders', ['orders' => $orders])
+            </div>
         </div>
     </div>
-    <script>
-        $(document).ready(function(){
-            $('.datepicker').datepicker({
-                format: 'mm/dd/yyyy',
-                autoclose: true
-            });
-        });
-    </script>
+
+    <!-- Edit Order Modal -->
+    <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="editOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editOrderModalLabel">Chỉnh Sửa Đơn Hàng</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editOrderForm">
+                        <input type="hidden" id="editOrderId">
+                        <div class="form-group">
+                            <label for="editOrderStatus">Trạng thái</label>
+                            <select class="form-control" id="editOrderStatus" name="status" required>
+                                @foreach(\App\Enums\OrderStatus::cases() as $status)
+                                    <option value="{{ $status->value }}">{{ $status->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="editTotalAmount">Tổng tiền</label>
+                            <input type="number" class="form-control" id="editTotalAmount" name="total_amount" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editOrderDate">Ngày đặt</label>
+                            <input type="date" class="form-control" id="editOrderDate" name="order_date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editName">Người mua</label>
+                            <input type="text" class="form-control" id="editName" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editAddress">Địa chỉ</label>
+                            <input type="text" class="form-control" id="editAddress" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPaymentMethod">Phương thức thanh toán</label>
+                            <select class="form-control" id="editPaymentMethod" name="payment_method" required>
+                                <option value="cod">Thanh toán khi nhận hàng</option>
+                                <option value="bank_transfer">Chuyển khoản ngân hàng</option>
+                                <option value="credit_card">Thẻ tín dụng</option>
+                                <option value="paypal">PayPal</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{ asset('js/admin/manage_orders.js') }}"></script>
 @endsection

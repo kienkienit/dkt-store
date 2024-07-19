@@ -13,3 +13,6 @@
     justify-content: center;
     gap: 5px;
 }
+.btn-add-user {
+    margin-bottom: 20px;
+}

@@ -23,21 +23,30 @@ class OrderController extends Controller
     {
         $items = json_decode($request->input('items'), true);
 
-        $data = [
-            'user_id' => auth()->id(),
-            'name' => $request->input('name'),
-            'address' => $request->input('address'),
-            'phone_number' => $request->input('phone_number'),
-            'payment_method' => $request->input('payment_method'),
-            'items' => $items,
-            'total_amount' => $request->input('total_amount'),
-            'order_date' => now(),
-            'status' => 'pending',
-        ];
+        $data = $request->only([
+            'name', 
+            'address', 
+            'phone_number', 
+            'payment_method', 
+            'total_amount'
+        ]);
 
-        $this->orderService->placeOrder($data);
+        $data['user_id'] = auth()->id();
+        $data['items'] = $items;
+        $data['order_date'] = now();
+        $data['status'] = 'pending';
+
+        $order = $this->orderService->placeOrder($data);
 
         foreach ($items as $item) {
+            $orderItem = [
+                'order_id' => $order->id,
+                'product_id' => $item['product_id'],
+                'quantity' => $item['quantity'],
+                'price' => $item['price'],
+            ];
+
+            $this->orderService->createOrderDetail($orderItem);
             $this->cartService->deleteCartItemByProductId($item['product_id']);
         }
 

@@ -5,7 +5,7 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="top-content">
                 <h2>Danh Sách Tài Khoản</h2>
                 <button class="btn btn-success btn-add-user" data-toggle="modal" data-target="#addUserModal">Thêm Tài Khoản</button>
             </div>

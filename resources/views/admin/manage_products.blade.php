@@ -5,7 +5,23 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="row align-items-end">
+                <div class="col-md-6">
+                    <label for="productType">Loại sản phẩm</label>
+                    <select class="form-control" id="productType">
+                        <option value="">Tất cả</option>
+                        @foreach($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="productName">Tên sản phẩm:</label>
+                    <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
+                </div>
+            </div>
+            <button class="btn btn-primary btn-search">Tìm kiếm</button>
+            <div class="top-content">
                 <h2>Danh Sách Sản Phẩm</h2>
                 <button class="btn btn-success btn-add-product" data-toggle="modal" data-target="#addProductModal">Thêm Sản Phẩm</button>
             </div>

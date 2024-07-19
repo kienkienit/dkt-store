@@ -13,6 +13,7 @@ use App\Http\Controllers\User\OrderController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ProductVariantController as AdminProductVariantController;
 
@@ -93,10 +94,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
             });
         });
         Route::prefix('orders')->group(function () {
-            Route::get('/', [OrderController::class, 'index'])->name('admin.manage.orders');
-            Route::get('/{id}', [OrderController::class, 'show'])->name('admin.manage.orders.show');
-            Route::post('update', [OrderController::class, 'update'])->name('admin.manage.orders.update');
-            Route::delete('delete', [OrderController::class, 'delete'])->name('admin.manage.orders.delete');
+            Route::get('/', [AdminOrderController::class, 'index'])->name('admin.manage.orders');
+            Route::get('/{id}', [AdminOrderController::class, 'show'])->name('admin.manage.orders.show');
+            Route::post('/{id}', [AdminOrderController::class, 'update'])->name('admin.manage.orders.update');
+            Route::get('/{id}/detail', [AdminOrderController::class, 'detail'])->name('admin.manage.orders.detail');
         });
         Route::prefix('users')->group(function () {
             Route::get('/', [UserController::class, 'index'])->name('admin.manage.users');

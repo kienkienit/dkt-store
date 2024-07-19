@@ -10,4 +10,25 @@ body {
     flex: 1;
     margin-top: 20px;
     background-color: #f8f4f4;
+    padding-top: 20px;
+}
+.container {
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+.fixed-table {
+    table-layout: fixed;
+    width: 100%;
+}
+.fixed-table th, .fixed-table td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.fixed-table thead {
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 100;
 }

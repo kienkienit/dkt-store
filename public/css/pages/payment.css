@@ -60,20 +60,21 @@
 }
 .btn-order {
     background-color: #77ca64;
-    border: none;
+    border: 1px solid #77ca64;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
 }
 .btn-back-to-home {
     background-color: #343a40;
-    border: none;
+    border: 1px solid #141414;
     padding: 5px 10px;
     cursor: pointer;
     border-radius: 5px;
 }
 .btn-back-to-home:hover {
     background-color: #141414;
+    border: 1px solid #141414;
 }
 .btn-order:hover {
     background-color: white;

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -16,7 +17,8 @@ class Order extends Model
         'total_amount',
         'name',
         'address',
-        'payment_method'
+        'payment_method',
+        'phone_number'
     ];
 
     public function user()
@@ -28,4 +30,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    protected $casts = [
+        'status' => OrderStatus::class,
+        'order_date' => 'datetime',
+    ];
 }

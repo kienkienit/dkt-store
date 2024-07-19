@@ -1,6 +1,3 @@
-.container {
-    margin: 0;
-}
 .table thead th {
     vertical-align: middle;
     text-align: center;
@@ -37,4 +34,9 @@
 }
 td > .img-fluid {
     max-width: 50px;
+}
+.top-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
