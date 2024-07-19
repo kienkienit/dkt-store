@@ -17,4 +17,15 @@ class UserRepository extends BaseRepository
     {
         return $this->model->orderBy('created_at', 'desc')->paginate($perPage, ['*'], 'page', $page);
     }
+
+    public function delete($id)
+    {
+        $user = $this->model->find($id);
+
+        if (!$user) {
+            throw new \Exception('Tài khoản không tồn tại.');
+        }
+
+        return $user->delete();
+    }
 }

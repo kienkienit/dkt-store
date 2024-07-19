@@ -101,7 +101,11 @@ $(document).ready(function() {
                     alert('Tài khoản đã được xóa thành công!');
                 },
                 error: function(xhr) {
-                    alert('Có lỗi xảy ra khi xóa tài khoản.');
+                    if (xhr.status === 403) {
+                        alert(xhr.responseJSON.error);
+                    } else {
+                        alert('Có lỗi xảy ra khi xóa tài khoản.');
+                    }
                 }
             });
         }

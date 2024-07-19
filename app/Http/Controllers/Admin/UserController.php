@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\HttpStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateUserRequest;
 use App\Http\Requests\UserRequest;
@@ -53,7 +54,11 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        $this->userService->deleteUser($id);
-        return json_response(true, ['message' => 'Tài khoản đã được xóa thành công!']);
+        try {
+            $this->userService->deleteUser($id);
+            return json_response(true, ['success' => 'Tài khoản đã được xóa thành công!']);
+        } catch (\Exception $e) {
+            return json_response(false, ['error' => $e->getMessage()], HttpStatus::FORBIDDEN->value);
+        }
     }
 }
