@@ -1,5 +1,3 @@
-<!-- resources/views/partials-admin/news.blade.php -->
-
 <table class="table table-bordered">
     <thead>
         <tr>

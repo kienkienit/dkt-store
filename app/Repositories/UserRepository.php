@@ -15,7 +15,7 @@ class UserRepository extends BaseRepository
 
     public function paginate($page, $perPage = self::PER_PAGE)
     {
-        return $this->model->orderBy('created_at', 'desc')->paginate($perPage, ['*'], 'page', $page);
+        return $this->model->where('role', 'user')->orderBy('created_at', 'desc')->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function delete($id)

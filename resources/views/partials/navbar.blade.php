@@ -1,5 +1,5 @@
 <nav class="navbar-container" id="navbar">
-    <ul class="navbar-menu">
+    <ul class="navbar-menu" id="navbar-menu">
         <li class="navbar-item active"><a href="/">Trang Chủ</a></li>
         <li class="navbar-item"><a href="#">Giới Thiệu</a></li>
         <li class="navbar-item dropdown">
@@ -14,4 +14,3 @@
         <li class="navbar-item"><a href="#">Liên Hệ</a></li>
     </ul>
 </nav>
-

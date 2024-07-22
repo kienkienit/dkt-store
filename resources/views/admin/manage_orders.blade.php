@@ -5,9 +5,9 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div class="row mb-4 align-items-end">
-                <div class="col-md-5">
-                    <label for="orderStatus">Trạng thái đơn hàng</label>
+            <div class="row mb-4 align-items-end ml-3">
+                <div class="col-md-5 pl-0">
+                    <label for="orderStatus">Trạng thái đơn hàng:</label>
                     <select class="form-control" id="orderStatus">
                         <option>Tất cả</option>
                         <option value="pending">Chờ xử lý</option>
@@ -22,8 +22,8 @@
                     <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
                 </div>
             </div>
-            <div class="row mb-4 align-items-end">
-                <div class="col-md-5">
+            <div class="row mb-4 align-items-end ml-3">
+                <div class="col-md-5 pl-0">
                     <label for="startDate">Ngày đặt từ ngày:</label>
                     <div class="input-group">
                         <input type="text" class="form-control datepicker" id="startDate" placeholder="mm/dd/yyyy">
@@ -42,8 +42,8 @@
                     </div>
                 </div>
             </div>
-            <button class="btn btn-primary btn-search">Tìm kiếm</button>
-            <h2>Danh Sách Đơn Hàng</h2>
+            <button class="btn btn-primary btn-search ml-3">Tìm kiếm</button>
+            <h2 class="ml-3 mb-3">Danh Sách Đơn Hàng</h2>
             <div id="orders-content">
                 @include('partials-admin.orders', ['orders' => $orders])
             </div>

@@ -5,7 +5,7 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div class="top-content">
+            <div class="top-content ml-3">
                 <h2>Danh Sách Tin Tức</h2>
                 <button class="btn btn-success btn-add-news" data-toggle="modal" data-target="#addNewsModal">Thêm Tin Tức</button>
             </div>
@@ -15,8 +15,6 @@
         </div>
     </div>
 
-    <!-- Modals thêm và sửa tin tức -->
-    <!-- Add News Modal -->
     <div class="modal fade" id="addNewsModal" tabindex="-1" role="dialog" aria-labelledby="addNewsModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -51,7 +49,6 @@
         </div>
     </div>
 
-    <!-- Edit News Modal -->
     <div class="modal fade" id="editNewsModal" tabindex="-1" role="dialog" aria-labelledby="editNewsModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

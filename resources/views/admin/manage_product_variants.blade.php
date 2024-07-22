@@ -5,18 +5,17 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div class="top-container">
-                <h2>Danh Sách Biến Thể cho Sản Phẩm: {{ $product->name }}</h2>
+            <div class="top-container ml-3 mr-3">
+                <h2>Danh Sách Biến Thể Sản Phẩm</h2>
                 <button class="btn btn-success btn-add-variant" data-toggle="modal" data-target="#addVariantModal">Thêm Biến Thể</button>
             </div>
-            <a href="{{ route('admin.manage.products') }}" class="link-to-products">Danh Sách Sản Phẩm</a>
+            <a href="{{ route('admin.manage.products') }}" class="link-to-products ml-3">Danh Sách Sản Phẩm</a>
             <div id="variants-content">
                 @include('partials-admin.product_variants', ['variants' => $variants])
             </div>
         </div>
     </div>
 
-    <!-- Add Variant Modal -->
     <div class="modal fade" id="addVariantModal" tabindex="-1" role="dialog" aria-labelledby="addVariantModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -52,7 +51,6 @@
         </div>
     </div>
 
-    <!-- Edit Variant Modal -->
     <div class="modal fade" id="editVariantModal" tabindex="-1" role="dialog" aria-labelledby="editVariantModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

@@ -1,6 +1,5 @@
 .navbar-container {
     background-color: #212529;
-    height: 50px;
     margin: 0 auto;
     padding: 0 15%;
 }
@@ -31,6 +30,7 @@
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     margin-top: 0;
     padding: 0;
+    z-index: 1000;
 }
 .dropdown-item {
     width: auto;
@@ -54,6 +54,8 @@
     font-size: 18px;
     width: 30px;
     padding: 0;
+    display: none;
+    z-index: 1000;
 }
 .navbar-toggler-icon {
     width: 100%;
@@ -66,17 +68,39 @@
 }
 @media (max-width: 992px) {
     .navbar-container {
-        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .navbar-menu {
+        flex-direction: column;
+        width: 200px;
+        background-color: white;
         position: fixed;
         top: 0;
-        left: -250px;
-        width: 250px;
+        left: -200px;
         height: 100%;
+        overflow-y: auto;
         transition: left 0.3s ease-in-out;
         z-index: 1000;
+        justify-content: flex-start;
     }
-    .navbar-container.show {
-        left: 0;
+    .navbar-item {
+        width: 100%;
+        border: 1px solid #77ca64;
+        border-top: none;
+        margin: 0;
+    }
+    .navbar-item a {
+        color: #77ca64;
+        display: block;
+        width: 100%;
+        padding: 15px 20px;
+    }
+    .navbar-item.dropdown {
+        position: relative;
+    }
+    .navbar-item:hover a {
+        color: white;
     }
     .navbar-toggler {
         display: flex;
@@ -90,7 +114,26 @@
         flex-direction: column;
         text-align: center;
     }
-    .navbar-item {
-        margin: 0;
+    .navbar-menu.active {
+        left: 0;
+    }
+    .navbar-item.dropdown {
+        position: relative;
+    }
+    .dropdown-menu {
+        display: none;
+        flex-direction: column;
+        background-color: #77ca64;
+        width: 100%;
+        position: absolute;
+        box-shadow: none;
+        top: 0;
+        left: 100%;
+    }
+    .navbar-item.dropdown:hover .dropdown-menu {
+        display: flex;
+    }
+    .dropdown-arrow {
+        display: none;
     }
 }

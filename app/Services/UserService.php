@@ -65,10 +65,6 @@ class UserService
 
     public function deleteUser($id)
     {
-        if (auth()->id() == $id) {
-            throw new \Exception('Bạn không thể xóa tài khoản của chính mình.');
-        }
-        
         return $this->userRepository->delete($id);
     }
 }

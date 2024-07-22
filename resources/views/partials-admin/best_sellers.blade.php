@@ -1,5 +1,5 @@
 <div class="tab-pane fade show active" id="best-sellers" role="tabpanel" aria-labelledby="best-sellers-tab">
-    <h3>Sản phẩm bán chạy</h3>
+    <h3 class="ml-3">Sản phẩm bán chạy</h3>
     <table class="table table-bordered">
         <thead>
             <tr>

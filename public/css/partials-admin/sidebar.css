@@ -5,7 +5,6 @@
     padding-top: 20px;
     width: 250px;
     margin-top: 20px;
-    margin-left: 20px;
 }
 .admin-manage {
     font-weight: bold;
@@ -22,6 +21,9 @@
     -o-border-radius: 20px;
 }
 .admin-sidebar ul {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
     list-style: none;
     padding: 0;
     background-color: #f8f4f4;
@@ -63,4 +65,9 @@
     -moz-border-radius: 20px;
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
+}
+@media (max-width: 992px) {
+    .admin-sidebar {
+        display: none;
+    }
 }

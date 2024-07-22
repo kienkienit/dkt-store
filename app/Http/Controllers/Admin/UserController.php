@@ -54,11 +54,7 @@ class UserController extends Controller
 
     public function delete($id)
     {
-        try {
-            $this->userService->deleteUser($id);
-            return json_response(true, ['success' => 'Tài khoản đã được xóa thành công!']);
-        } catch (\Exception $e) {
-            return json_response(false, ['error' => $e->getMessage()], HttpStatus::FORBIDDEN->value);
-        }
+        $this->userService->deleteUser($id);
+        return json_response(true, ['success' => 'Tài khoản đã được xóa thành công!']);
     }
 }

@@ -20,8 +20,20 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
         });
     }
-    function toggleMenu() {
-        const menu = document.getElementById('navbar');
-        menu.classList.toggle('show');
-    }
+
+    const navbarToggler = document.querySelector('.navbar-toggler');
+    const navbarMenu = document.querySelector('.navbar-menu');
+    
+    navbarToggler.addEventListener('click', function () {
+        navbarMenu.classList.toggle('active');
+    });
+    
+    document.addEventListener('click', function (event) {
+        const isClickInsideNavbar = navbarMenu.contains(event.target);
+        const isClickOnToggler = navbarToggler.contains(event.target);
+        
+        if (!isClickInsideNavbar && !isClickOnToggler) {
+            navbarMenu.classList.remove('active');
+        }
+    });
 });

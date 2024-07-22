@@ -38,7 +38,7 @@
     </div>
     <div class="bottom-header">
         <div class="left-bottom-header">
-            <button class="navbar-toggler" onclick="toggleMenu()">
+            <button class="navbar-toggler" id="navbar-toggler">
                 <div class="navbar-toggler-icon"></div>
                 <div class="navbar-toggler-icon"></div>
                 <div class="navbar-toggler-icon"></div>
@@ -78,4 +78,5 @@
         </div>
     </div>
 </header>
-<script src="js/header.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="{{ asset('js/header.js') }}"></script>
