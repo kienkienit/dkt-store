@@ -3,7 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Product;
-use Illuminate\Support\Facades\DB;
 
 class ProductRepository extends BaseRepository
 {
@@ -29,23 +28,18 @@ class ProductRepository extends BaseRepository
         return $this->model->where('category_id', $categoryId)->orderBy('created_at', 'desc')->get();
     }
 
-    public function getBestSellers()
+    public function filterProducts($categoryId = null, $productName = null, $page = 1, $perPage = self::PER_PAGE)
     {
-        return $this->model->select('products.*', DB::raw('SUM(order_details.quantity) as total_quantity'))
-            ->join('order_details', 'products.id', '=', 'order_details.product_id')
-            ->groupBy('products.id')
-            ->orderBy('total_quantity', 'desc')
-            ->limit(10)
-            ->get();
-    }
+        $query = $this->model;
 
-    public function getTopRevenue()
-    {
-        return $this->model->select('products.*', DB::raw('SUM(order_details.quantity * order_details.price) as total_revenue'))
-            ->join('order_details', 'products.id', '=', 'order_details.product_id')
-            ->groupBy('products.id')
-            ->orderBy('total_revenue', 'desc')
-            ->limit(10)
-            ->get();
+        if ($categoryId) {
+            $query = $query->where('category_id', $categoryId);
+        }
+
+        if ($productName) {
+            $query = $query->where('name', 'like', '%' . $productName . '%');
+        }
+
+        return $query->paginate($perPage, ['*'], 'page', $page);
     }
 }

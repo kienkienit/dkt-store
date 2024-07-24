@@ -40,4 +40,9 @@ class OrderService
     {
         return $this->orderRepository->paginate($page);
     }
+
+    public function filterOrders($page, $filters)
+    {
+        return $this->orderRepository->filterOrders($page, $filters);
+    }
 }

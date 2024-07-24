@@ -33,6 +33,7 @@ class ProductController extends Controller
     {
         $perPage = request()->query('per_page', 8);
         $page = request()->query('page', 1);
+        
         $products = $this->productService->getProductsByCategory($categoryId, $perPage, $page);
         $pagination = $products->toArray();
         

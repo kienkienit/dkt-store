@@ -1,19 +1,45 @@
 $(document).ready(function(){
-    $(document).on('click', '.pagination a', function(event) {
-        event.preventDefault();
-        var page = $(this).data('page');
-        fetch_data(page);
+    $('.datepicker').datepicker({
+        dateFormat: 'dd/mm/yy'
     });
 
-    function fetch_data(page) {
+    function fetchOrders(page, filters = {}) {
         $.ajax({
             url: "/admin/manage/orders?page=" + page,
+            method: 'GET',
+            data: filters,
             success: function(data) {
                 $('#orders-content').html(data.orders);
                 $('#pagination-content').html(data.pagination);
+            },
+            error: function(error) {
+                console.error('Error fetching orders:', error);
             }
         });
     }
+
+    $(document).on('click', '.pagination a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('page');
+        let filters = {
+            status: $('#orderStatus').val(),
+            order_code: $('#orderCode').val(),
+            start_date: $('#startDate').val(),
+            end_date: $('#endDate').val()
+        };
+        fetchOrders(page, filters);
+    });
+
+    $(document).on('click', '.btn-search', function(event) {
+        event.preventDefault();
+        let filters = {
+            status: $('#orderStatus').val(),
+            order_code: $('#orderCode').val(),
+            start_date: $('#startDate').val(),
+            end_date: $('#endDate').val()
+        };
+        fetchOrders(1, filters);
+    });
 
     $(document).on('click', '.btn-edit', function() {
         var orderId = $(this).data('id');
@@ -60,7 +86,13 @@ $(document).ready(function(){
             success: function(data) {
                 $('#editOrderModal').modal('hide');
                 alert('Thông tin đơn hàng đã được cập nhật thành công!');
-                fetch_data(1);
+                let filters = {
+                    status: $('#orderStatus').val(),
+                    order_code: $('#orderCode').val(),
+                    start_date: $('#startDate').val(),
+                    end_date: $('#endDate').val()
+                };
+                fetchOrders(1, filters);
             },
             error: function(xhr) {
                 alert('Có lỗi xảy ra khi cập nhật thông tin đơn hàng.');
@@ -71,5 +103,7 @@ $(document).ready(function(){
     $(document).on('click', '.btn-detail', function() {
         var orderId = $(this).data('id');
         window.location.href = "/admin/manage/orders/" + orderId + "/detail";
-    });    
+    });
+
+    fetchOrders(1);
 });

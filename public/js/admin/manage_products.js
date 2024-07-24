@@ -1,19 +1,32 @@
 $(document).ready(function() {
-    $(document).on('click', '.pagination a', function(event) {
-        event.preventDefault();
-        var page = $(this).data('page');
-        fetch_data(page);
-    });
-
-    function fetch_data(page) {
+    function fetch_data(page, categoryId, productName) {
         $.ajax({
             url: "/admin/manage/products?page=" + page,
+            method: 'GET',
+            data: {
+                category_id: categoryId,
+                product_name: productName
+            },
             success: function(data) {
                 $('#product-content').html(data.products);
                 $('#pagination-content').html(data.pagination);
             }
         });
     }
+
+    $('.btn-search').on('click', function() {
+        var categoryId = $('#productType').val();
+        var productName = $('#productName').val();
+        fetch_data(1, categoryId, productName);
+    });
+
+    $(document).on('click', '.pagination a', function(event) {
+        event.preventDefault();
+        var page = $(this).data('page');
+        var categoryId = $('#productType').val();
+        var productName = $('#productName').val();
+        fetch_data(page, categoryId, productName);
+    });
 
     $('#addProductForm').on('submit', function(event) {
         event.preventDefault();
@@ -114,4 +127,6 @@ $(document).ready(function() {
         var productId = $(this).data('id');
         window.location.href = "/admin/manage/products/" + productId + "/variants";
     });
+
+    fetch_data(1, null, null);
 });

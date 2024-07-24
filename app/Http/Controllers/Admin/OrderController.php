@@ -16,10 +16,18 @@ class OrderController extends Controller
     {
         $this->orderService = $orderService;
     }
-
+    
     public function index(Request $request)
     {
-        $orders = $this->orderService->paginateOrders($request->input("page", 1));
+        $filters = [
+            'status' => $request->input('status', 'all'),
+            'order_code' => $request->input('order_code'),
+            'start_date' => $request->input('start_date', null),
+            'end_date' => $request->input('end_date', null)
+        ];
+        $page = $request->input('page', 1);
+
+        $orders = $this->orderService->filterOrders($page, $filters);
         $orderStatuses = OrderStatus::cases();
         $pagination = $orders->toArray();
 

@@ -8,8 +8,8 @@
             <div class="row mb-4 align-items-end ml-3">
                 <div class="col-md-5 pl-0">
                     <label for="orderStatus">Trạng thái đơn hàng:</label>
-                    <select class="form-control" id="orderStatus">
-                        <option>Tất cả</option>
+                    <select class="form-control" id="orderStatus" name="status">
+                        <option value="">Tất cả</option>
                         <option value="pending">Chờ xử lý</option>
                         <option value="processing">Đang xử lý</option>
                         <option value="shipped">Đã giao</option>
@@ -18,15 +18,15 @@
                     </select>
                 </div>
                 <div class="col-md-5">
-                    <label for="productName">Mã đơn hàng:</label>
-                    <input type="text" class="form-control" id="productName" placeholder="Nhập tên sản phẩm">
+                    <label for="orderCode">Mã đơn hàng:</label>
+                    <input type="text" class="form-control" id="orderCode" name="order_code" placeholder="Nhập mã đơn hàng">
                 </div>
             </div>
             <div class="row mb-4 align-items-end ml-3">
                 <div class="col-md-5 pl-0">
                     <label for="startDate">Ngày đặt từ ngày:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control datepicker" id="startDate" placeholder="mm/dd/yyyy">
+                        <input type="text" class="form-control datepicker" id="startDate" name="start_date" placeholder="mm/dd/yyyy">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                         </div>
@@ -35,7 +35,7 @@
                 <div class="col-md-5">
                     <label for="endDate">Đến ngày:</label>
                     <div class="input-group">
-                        <input type="text" class="form-control datepicker" id="endDate" placeholder="mm/dd/yyyy">
+                        <input type="text" class="form-control datepicker" id="endDate" name="end_date" placeholder="mm/dd/yyyy">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fa fa-calendar"></i></span>
                         </div>
@@ -53,7 +53,6 @@
         </div>
     </div>
 
-    <!-- Edit Order Modal -->
     <div class="modal fade" id="editOrderModal" tabindex="-1" role="dialog" aria-labelledby="editOrderModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">

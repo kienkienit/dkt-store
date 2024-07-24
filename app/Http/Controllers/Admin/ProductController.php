@@ -19,7 +19,11 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $products = $this->productService->paginateProducts($request->input('page', 1));
+        $categoryId = $request->input('category_id');
+        $productName = $request->input('product_name');
+        $page = $request->input('page', 1);
+
+        $products = $this->productService->filterProducts($categoryId, $productName, $page);
         $pagination = $products->toArray();
 
         if ($request->ajax()) {

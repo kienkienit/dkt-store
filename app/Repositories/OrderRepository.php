@@ -45,4 +45,33 @@ class OrderRepository extends BaseRepository
             ->toArray();
     }
     
+    public function filterOrders($page, $filters, $perPage = self::PER_PAGE)
+    {
+        $query = $this->model->orderBy('order_date', 'desc');
+    
+        if ($filters['status'] !== 'all' && !empty($filters['status'])) {
+            $query->where('status', $filters['status']);
+        }
+    
+        if (!empty($filters['order_code'])) {
+            $query->where('order_code', 'like', '%' . $filters['order_code'] . '%');
+        }
+    
+        if (!empty($filters['start_date']) && empty($filters['end_date'])) {
+            $query->whereDate('order_date', '>=', \Carbon\Carbon::createFromFormat('d/m/Y', $filters['start_date'])->format('Y-m-d'));
+        }
+    
+        if (empty($filters['start_date']) && !empty($filters['end_date'])) {
+            $query->whereDate('order_date', '<=', \Carbon\Carbon::createFromFormat('d/m/Y', $filters['end_date'])->format('Y-m-d'));
+        }
+    
+        if (!empty($filters['start_date']) && !empty($filters['end_date'])) {
+            $query->whereBetween('order_date', [
+                \Carbon\Carbon::createFromFormat('d/m/Y', $filters['start_date'])->format('Y-m-d'),
+                \Carbon\Carbon::createFromFormat('d/m/Y', $filters['end_date'])->format('Y-m-d')
+            ]);
+        }
+    
+        return $query->paginate($perPage, ['*'], 'page', $page);
+    }      
 }

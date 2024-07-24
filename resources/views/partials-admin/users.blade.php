@@ -4,8 +4,8 @@
             <th>Username</th>
             <th>Email</th>
             <th>Role</th>
-            <th>Created_at</th>
-            <th>Updated_at</th>
+            <th>Ngày tạo</th>
+            <th>Cập nhật</th>
             <th>Option</th>
         </tr>
     </thead>
