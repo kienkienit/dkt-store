@@ -16,8 +16,17 @@ class NewsController extends Controller
 
     public function index(Request $request)
     {
-        $news = $this->newsService->paginateNews($request->input('page', 1), 4);
-        return view('pages.news', compact('news'));
+        $news = $this->newsService->paginateNews($request->input('page', 1));
+        $pagination = $news->toArray();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'news' => view('partials.news_list', compact('news'))->render(),
+                'pagination' => view('partials.pagination', ['pagination' => $pagination])->render(),
+            ]);
+        }
+
+        return view('pages.news', compact('news', 'pagination'));
     }
 
     public function show($id)

@@ -26,9 +26,9 @@ class ProductService
         return $this->productRepository->findById($id);
     }
 
-    public function getProductsByCategory($categoryId, $perPage = 8)
+    public function getProductsByCategory($categoryId, $perPage = 8, $page = 1)
     {
-        return $this->productRepository->getProductsByCategory($categoryId, $perPage);
+        return $this->productRepository->getProductsByCategory($categoryId, $perPage, $page);
     }
 
     public function getHotProductsByCategory($categoryId)

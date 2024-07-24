@@ -12,6 +12,9 @@
             <div id="users-content">
                 @include('partials-admin.users', ['users' => $users])
             </div>
+            <div id="pagination-content">
+                @include('partials-admin.pagination', ['pagination' => $pagination])
+            </div>
         </div>
     </div>
 
@@ -29,23 +32,16 @@
                 <div class="modal-body">
                     <form id="addUserForm">
                         <div class="form-group">
-                            <label for="username">Username</label>
+                            <label for="username">Username <span>*</span></label>
                             <input type="text" class="form-control" id="username" name="username" required>
                         </div>
                         <div class="form-group">
-                            <label for="email">Email</label>
+                            <label for="email">Email <span>*</span></label>
                             <input type="email" class="form-control" id="email" name="email" required>
                         </div>
                         <div class="form-group">
-                            <label for="password">Password</label>
+                            <label for="password">Password <span>*</span></label>
                             <input type="password" class="form-control" id="password" name="password" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="role">Role</label>
-                            <select class="form-control" id="role" name="role" required>
-                                <option value="user">User</option>
-                                <option value="admin">Admin</option>
-                            </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu</button>
                     </form>

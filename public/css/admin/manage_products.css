@@ -40,3 +40,14 @@ td > .img-fluid {
     justify-content: space-between;
     align-items: center;
 }
+.go-home a{
+    color: #343a40;
+}
+.go-home a:hover {
+    color: #77ca64;
+    text-decoration: none;
+}
+.go-home p {
+    color: #77ca64;
+    display: inline-block;
+}

@@ -22,4 +22,12 @@ class ProductVariantRepository extends BaseRepository
     {
         return $this->model->where('product_id', $productId)->orderBy('created_at', 'desc')->paginate(self::PER_PAGE, ['*'], 'page', $page);
     }
+
+    public function checkVariantExist($productId, $color, $storage)
+    {
+        return $this->model->where('product_id', $productId)
+                        ->where('color', $color)
+                        ->where('storage', $storage)
+                        ->exists();
+    }
 }

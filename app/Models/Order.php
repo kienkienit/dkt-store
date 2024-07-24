@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\OrderStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
@@ -18,7 +19,8 @@ class Order extends Model
         'name',
         'address',
         'payment_method',
-        'phone_number'
+        'phone_number',
+        'order_code'
     ];
 
     public function user()
@@ -35,4 +37,17 @@ class Order extends Model
         'status' => OrderStatus::class,
         'order_date' => 'datetime',
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($order) {
+            do {
+                $order_code = 'ORD-' . strtoupper(Str::random(6));
+            } while (Order::where('order_code', $order_code)->exists());
+
+            $order->order_code = $order_code;
+        });
+    }
 }

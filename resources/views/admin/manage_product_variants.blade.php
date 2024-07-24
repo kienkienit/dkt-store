@@ -5,13 +5,20 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div class="top-container ml-3 mr-3">
+            <div class="go-home ml-3 mb-3">
+                <a href="/admin/manage/products">Danh Sách Sản Phẩm</a>
+                <span>>></span>
+                <p>{{ $product->name }}</p>
+            </div>
+            <div class="top-container ml-3 mr-3 mb-3">
                 <h2>Danh Sách Biến Thể Sản Phẩm</h2>
                 <button class="btn btn-success btn-add-variant" data-toggle="modal" data-target="#addVariantModal">Thêm Biến Thể</button>
             </div>
-            <a href="{{ route('admin.manage.products') }}" class="link-to-products ml-3">Danh Sách Sản Phẩm</a>
             <div id="variants-content">
                 @include('partials-admin.product_variants', ['variants' => $variants])
+            </div>
+            <div id="pagination-content">
+                @include('partials-admin.pagination', ['pagination' => $pagination])
             </div>
         </div>
     </div>
@@ -29,19 +36,19 @@
                     <form id="addVariantForm">
                         <input type="hidden" id="product_id" name="product_id" value="{{ $product->id }}">
                         <div class="form-group">
-                            <label for="storage">Dung Lượng</label>
+                            <label for="storage">Dung Lượng <span>*</span></label>
                             <input type="text" class="form-control" id="storage" name="storage" required>
                         </div>
                         <div class="form-group">
-                            <label for="color">Màu Sắc</label>
+                            <label for="color">Màu Sắc <span>*</span></label>
                             <input type="text" class="form-control" id="color" name="color" required>
                         </div>
                         <div class="form-group">
-                            <label for="price">Giá</label>
+                            <label for="price">Giá <span>*</span></label>
                             <input type="number" class="form-control" id="price" name="price" required>
                         </div>
                         <div class="form-group">
-                            <label for="stock_quantity">Số Lượng Còn Lại</label>
+                            <label for="stock_quantity">Số Lượng Còn Lại <span>*</span></label>
                             <input type="number" class="form-control" id="stock_quantity" name="stock_quantity" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu</button>

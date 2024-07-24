@@ -12,6 +12,9 @@
             <div id="news-content">
                 @include('partials-admin.news', ['news' => $news])
             </div>
+            <div id="pagination-content">
+                @include('partials-admin.pagination', ['pagination' => $pagination])
+            </div>
         </div>
     </div>
 
@@ -27,19 +30,19 @@
                 <div class="modal-body">
                     <form id="addNewsForm">
                         <div class="form-group">
-                            <label for="title">Tiêu Đề</label>
+                            <label for="title">Tiêu Đề <span>*</span></label>
                             <input type="text" class="form-control" id="title" name="title" required>
                         </div>
                         <div class="form-group">
-                            <label for="content">Nội Dung</label>
+                            <label for="content">Nội Dung <span>*</span></label>
                             <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="published_date">Ngày Đăng Tin</label>
+                            <label for="published_date">Ngày Đăng Tin <span>*</span></label>
                             <input type="date" class="form-control" id="published_date" name="published_date" required>
                         </div>
                         <div class="form-group">
-                            <label for="image">Đường dẫn ảnh</label>
+                            <label for="image">Đường dẫn ảnh <span>*</span></label>
                             <input type="text" class="form-control" id="image" name="image" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Lưu</button>

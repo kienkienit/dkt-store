@@ -52,7 +52,7 @@
             <div class="price">{{ number_format($cart->items->sum(function($item) { return $item->price * $item->quantity; }), 0, ',', '.') }} VND</div>
         </div>
         <div class="cart-button">
-            <button class="remove-all btn btn-primary">Xóa tât cả</button>
+            <button class="remove-all btn btn-primary">Xóa tất cả</button>
             <button class="pay btn btn-primary">Thanh toán</button>
         </div>
     </div>

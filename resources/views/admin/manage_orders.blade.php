@@ -47,6 +47,9 @@
             <div id="orders-content">
                 @include('partials-admin.orders', ['orders' => $orders])
             </div>
+            <div id="pagination-content">
+                @include('partials-admin.pagination', ['pagination' => $pagination])
+            </div>
         </div>
     </div>
 
@@ -96,7 +99,7 @@
                                 <option value="paypal">PayPal</option>
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                        <button type="submit" class="btn btn-primary" id="updateOrderButton">Cập Nhật</button>
                     </form>
                 </div>
             </div>

@@ -1,7 +1,7 @@
 $(document).ready(function(){
     $(document).on('click', '.pagination a', function(event) {
         event.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
+        var page = $(this).data('page');
         fetch_data(page);
     });
 
@@ -10,6 +10,7 @@ $(document).ready(function(){
             url: "/admin/manage/orders?page=" + page,
             success: function(data) {
                 $('#orders-content').html(data.orders);
+                $('#pagination-content').html(data.pagination);
             }
         });
     }
@@ -25,6 +26,12 @@ $(document).ready(function(){
             $('#editAddress').val(data.address);
             $('#editPaymentMethod').val(data.payment_method);
             $('#editOrderModal').modal('show');
+
+            if (data.status === 'delivered') {
+                $('#updateOrderButton').prop('disabled', true);
+            } else {
+                $('#updateOrderButton').prop('disabled', false);
+            }
         });
     });
 

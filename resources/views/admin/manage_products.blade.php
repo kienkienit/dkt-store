@@ -28,6 +28,9 @@
             <div id="product-content">
                 @include('partials-admin.products', ['products' => $products])
             </div>
+            <div id="pagination-content">
+                @include('partials-admin.pagination', ['pagination' => $pagination])
+            </div>
         </div>
     </div>
 
@@ -44,15 +47,15 @@
                 <div class="modal-body">
                     <form id="addProductForm">
                         <div class="form-group">
-                            <label for="name">Tên sản phẩm</label>
+                            <label for="name">Tên sản phẩm <span>*</span></label>
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="description">Mô tả</label>
+                            <label for="description">Mô tả <span>*</span></label>
                             <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="image">Đường dẫn ảnh</label>
+                            <label for="image">Đường dẫn ảnh <span>*</span></label>
                             <input type="text" class="form-control" id="image" name="image" required>
                         </div>
                         <div class="form-group">
@@ -84,15 +87,15 @@
                     <form id="editProductForm">
                         <input type="hidden" id="editProductId">
                         <div class="form-group">
-                            <label for="edit_name">Tên sản phẩm</label>
+                            <label for="edit_name">Tên sản phẩm <span>*</span></label>
                             <input type="text" class="form-control" id="edit_name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <label for="edit_description">Mô tả</label>
+                            <label for="edit_description">Mô tả <span>*</span></label>
                             <textarea class="form-control" id="edit_description" name="description" rows="3" required></textarea>
                         </div>
                         <div class="form-group">
-                            <label for="edit_image">Đường dẫn ảnh</label>
+                            <label for="edit_image">Đường dẫn ảnh <span>*</span></label>
                             <input type="text" class="form-control" id="edit_image" name="image" required>
                         </div>
                         <div class="form-group">

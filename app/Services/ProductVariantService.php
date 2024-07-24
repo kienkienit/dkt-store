@@ -51,4 +51,9 @@ class ProductVariantService
             $variant->save();
         }
     }
+
+    public function checkVariantExist($productId, $color, $storage)
+    {
+        return $this->productVariantRepository->checkVariantExist($productId, $color, $storage);
+    }
 }

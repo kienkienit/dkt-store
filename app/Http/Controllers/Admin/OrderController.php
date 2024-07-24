@@ -19,17 +19,18 @@ class OrderController extends Controller
 
     public function index(Request $request)
     {
-        $page = $request->input("page", 1);
-        $orders = $this->orderService->paginateOrders($page);
+        $orders = $this->orderService->paginateOrders($request->input("page", 1));
         $orderStatuses = OrderStatus::cases();
+        $pagination = $orders->toArray();
 
         if ($request->ajax()) {
             return response()->json([
-                'orders' => view('partials-admin.orders', compact('orders'))->render()
+                'orders' => view('partials-admin.orders', compact('orders'))->render(),
+                'pagination' => view('partials-admin.pagination', ['pagination' => $pagination])->render(),
             ]);
         }
 
-        return view('admin.manage_orders', compact('orders', 'orderStatuses'));
+        return view('admin.manage_orders', compact('orders', 'orderStatuses', 'pagination'));
     }
 
     public function show($id)

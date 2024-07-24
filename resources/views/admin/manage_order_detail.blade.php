@@ -5,9 +5,10 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <div class="top-content">
-                <h2>Chi Tiết Đơn Hàng</h2>
-                <a href="{{ route('admin.manage.orders') }}" class="btn btn-success btn-back-orders">Danh Sách Đơn Hàng</a>
+            <div class="go-home mb-3">
+                <a href="/admin/manage/orders">Danh Sách Đơn Hàng</a>
+                <span>>></span>
+                <p>Chi Tiết Đơn Hàng {{ $order->order_code }}</p>
             </div>
             <h2 class="mt-4 mb-4">Thông tin đơn mua</h2>
             <table class="table table-bordered order-info">

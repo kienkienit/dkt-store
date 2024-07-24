@@ -23,6 +23,7 @@
     text-decoration: none;
     background-color: #77ca64;
     border-radius: 10px;
+    color: white;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
@@ -31,6 +32,7 @@
 .category-item.active a {
     background-color: #77ca64;
     border-radius: 10px;
+    color: white;
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;

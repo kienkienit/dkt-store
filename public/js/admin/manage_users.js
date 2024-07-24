@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $(document).on('click', '.pagination a', function(event) {
         event.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
+        var page = $(this).data('page');
         fetch_data(page);
     });
 
@@ -10,6 +10,7 @@ $(document).ready(function() {
             url: "/admin/manage/users?page=" + page,
             success: function(data) {
                 $('#users-content').html(data.users);
+                $('#pagination-content').html(data.pagination);
             }
         });
     }
@@ -21,7 +22,7 @@ $(document).ready(function() {
             username: $('#username').val(),
             email: $('#email').val(),
             password: $('#password').val(),
-            role: $('#role').val()
+            role: 'user'
         };
     
         $.ajax({

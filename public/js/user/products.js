@@ -1,54 +1,20 @@
 $(document).ready(function() {
     let currentPage = 1;
     let productsPerPage = 8;
-    let totalProducts = 0;
-    let currentCategoryId = null;
+    let currentCategoryId = $('.category-item.active').find('.category-link').data('id');
 
     function loadProducts(categoryId, page) {
         $.ajax({
             url: `/products/category/${categoryId}?page=${page}&per_page=${productsPerPage}`,
             method: 'GET',
             success: function(data) {
-                if (page === 1) {
-                    totalProducts = data.total; 
-                    currentCategoryId = categoryId;
-                    updatePagination();
-                }
-                $('#product-list').empty();
-                data.data.forEach(function(product) {
-                    var productId = product.id;
-                    var productHtml = `
-                        <div class="col-lg-3 col-md-4 col-sm-6 mb-4 p-0">
-                            <a href="/product/${product.id}" class="product-link">
-                                <div class="product-item">
-                                    <span class="is-loved"></span>
-                                    <img src="${product.image}" alt="Image">
-                                    <div class="name">${product.name}</div>
-                                    <div class="price">${new Intl.NumberFormat().format(product.price)} VND</div>
-                                    <button class="btn btn-primary add-to-cart">CHỌN SẢN PHẨM</button>
-                                </div>
-                            </a>
-                        </div>
-                    `;
-                    $('#product-list').append(productHtml);
-                });
+                $('#product-list').html(data.products);
+                $('.pagination-wrapper').html(data.pagination);
             },
             error: function(error) {
                 console.error('Error loading products:', error);
             }
         });
-    }
-
-    function updatePagination() {
-        let totalPages = Math.ceil(totalProducts / productsPerPage);
-        $('.pagination').empty();
-        for (let i = 1; i <= totalPages; i++) {
-            $('.pagination').append(`
-                <li class="page-item ${i === currentPage ? 'active' : ''}">
-                    <a class="page-link" href="#" data-page="${i}" data-category-id="${currentCategoryId}">${i}</a>
-                </li>
-            `);
-        }
     }
 
     $('.category-link').on('click', function(e) {
@@ -71,6 +37,5 @@ $(document).ready(function() {
         $(this).parent().addClass('active');
     });
 
-    let defaultCategoryId = $('.category-item.active').find('.category-link').data('id');
-    loadProducts(defaultCategoryId, currentPage);
+    loadProducts(currentCategoryId, currentPage);
 });

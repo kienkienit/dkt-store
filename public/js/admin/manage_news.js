@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $(document).on('click', '.pagination a', function(event) {
         event.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
+        var page = $(this).data('page');
         fetch_data(page);
     });
 
@@ -10,6 +10,7 @@ $(document).ready(function() {
             url: "/admin/manage/news?page=" + page,
             success: function(data) {
                 $('#news-content').html(data.news);
+                $('#pagination-content').html(data.pagination);
             }
         });
     }

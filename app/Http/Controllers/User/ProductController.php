@@ -32,8 +32,18 @@ class ProductController extends Controller
     public function getByCategory($categoryId)
     {
         $perPage = request()->query('per_page', 8);
-        $products = $this->productService->getProductsByCategory($categoryId, $perPage);
-        return response()->json($products);
+        $page = request()->query('page', 1);
+        $products = $this->productService->getProductsByCategory($categoryId, $perPage, $page);
+        $pagination = $products->toArray();
+        
+        if (request()->ajax()) {
+            return response()->json([
+                'products' => view('partials.product_list', compact('products'))->render(),
+                'pagination' => view('partials.pagination', ['pagination' => $pagination])->render(),
+            ]);
+        }
+    
+        return view('partials.products', compact('products', 'pagination'));
     }
 
     public function getHotProductsByCategory($categoryId)

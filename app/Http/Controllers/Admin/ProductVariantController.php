@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\HttpStatus;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProductVariantRequest;
 use Illuminate\Http\Request;
@@ -23,20 +24,28 @@ class ProductVariantController extends Controller
     {
         $variants = $this->productVariantService->paginateVariants($productId, $request->input('page', 1));
         $product = $this->productService->getProductById($productId);
+        $pagination = $variants->toArray();
 
         if ($request->ajax()) {
             return response()->json([
-                'variants' => view('partials-admin.product_variants', compact('variants'))->render()
+                'variants' => view('partials-admin.product_variants', compact('variants'))->render(),
+                'pagination' => view('partials-admin.pagination', ['pagination' => $pagination])->render(),
             ]);
         }
 
-        return view('admin.manage_product_variants', compact('variants', 'product'));
+        return view('admin.manage_product_variants', compact('variants', 'product', 'pagination'));
     }
 
     public function store(ProductVariantRequest $request, $productId)
     {
         $data = $request->all();
         $data['product_id'] = $productId;
+        $exists = $this->productVariantService->checkVariantExist($productId, $data['color'], $data['storage']);
+
+        if ($exists) {
+            return json_response(false, ['message' => 'Biến thể này đã tồn tại.'], HttpStatus::BAD_REQUEST->value);
+        }
+
         $this->productVariantService->createVariant($data);
 
         return json_response(true, ['message' => 'Biến thể đã được thêm thành công!']);

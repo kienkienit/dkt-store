@@ -11,11 +11,11 @@
     </div>
     <div class="product-detail-container">
         <div class="header-product-detail-container">
-            <div class="product-image">
+            <div class="product-image col-12 col-sm-4">
                 <img src="{{ $product->image }}" alt="Image">
                 <span class="is-loved"></span>
             </div>
-            <div class="product-detail">
+            <div class="product-detail col-12 col-sm-8">
                 <div class="product-name">{{ $product->name }}</div>
                 <div class="line"></div>
                 <div class="price" id="product-price">{{ number_format($initialPrice, 0, ',', '.') }} VND</div>

@@ -118,6 +118,9 @@ header a {
 .right-bottom-header > * {
     padding: 0 5px;
 }
+.right-bottom-header .cart {
+    cursor: pointer;
+}
 .navbar-toggler {
     display: none;
 }

@@ -20,14 +20,16 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $products = $this->productService->paginateProducts($request->input('page', 1));
+        $pagination = $products->toArray();
 
         if ($request->ajax()) {
             return response()->json([
-                'products' => view('partials-admin.products', compact('products'))->render()
+                'products' => view('partials-admin.products', compact('products'))->render(),
+                'pagination' => view('partials-admin.pagination', ['pagination' => $pagination])->render(),
             ]);
         }
 
-        return view('admin.manage_products', compact('products'));
+        return view('admin.manage_products', compact('products', 'pagination'));
     }
 
     public function store(ProductRequest $request)

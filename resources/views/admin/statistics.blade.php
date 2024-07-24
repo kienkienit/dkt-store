@@ -5,7 +5,7 @@
     @include('partials-admin.sidebar')
     <div class="main-content">
         <div class="container">
-            <ul class="nav nav-tabs ml-3 mb-4" id="statsTabs" role="tablist">
+            <ul class="nav nav-tabs mb-4" id="statsTabs" role="tablist">
                 <li class="nav-item">
                     <a class="nav-link active" id="best-sellers-tab" data-toggle="tab" href="#best-sellers" role="tab" aria-controls="best-sellers" aria-selected="true">Sản phẩm bán chạy</a>
                 </li>

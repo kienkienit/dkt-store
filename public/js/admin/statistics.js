@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', function () {
                 datasets: [{
                     label: label,
                     data: data,
-                    backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                    borderColor: 'rgba(54, 162, 235, 1)',
+                    backgroundColor: 'rgba(119, 202, 100, 0.5)',
+                    borderColor: 'rgba(119, 202, 100, 1)',
                     borderWidth: 1
                 }]
             },

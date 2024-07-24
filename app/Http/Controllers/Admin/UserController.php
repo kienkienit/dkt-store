@@ -21,13 +21,16 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = $this->userService->paginateUsers($request->input('page', 1));
+        $pagination = $users->toArray();
+
         if ($request->ajax()) {
             return response()->json([
-                'users' => view('partials-admin.users', compact('users'))->render()
+                'users' => view('partials-admin.users', compact('users'))->render(),
+                'pagination' => view('partials-admin.pagination', ['pagination' => $pagination])->render(),
             ]);
         }
 
-        return view('admin.manage_users', compact('users'));
+        return view('admin.manage_users', compact('users', 'pagination'));
     }
 
     public function store(UserRequest $request)

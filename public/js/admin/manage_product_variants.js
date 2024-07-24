@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $(document).on('click', '.pagination a', function(event) {
         event.preventDefault();
-        var page = $(this).attr('href').split('page=')[1];
+        var page = $(this).data('page');
         fetch_data(page);
     });
 
@@ -10,6 +10,7 @@ $(document).ready(function() {
             url: fetchVariantsUrl + "?page=" + page,
             success: function(data) {
                 $('#variants-content').html(data.variants);
+                $('#pagination-content').html(data.pagination);
             }
         });
     }
@@ -40,7 +41,7 @@ $(document).ready(function() {
                 alert('Biến thể đã được thêm thành công!');
             },
             error: function(xhr) {
-                alert('Có lỗi xảy ra khi thêm biến thể.');
+                alert('Biến thể này đã tồn tại!');
             }
         });
     });

@@ -25,6 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    function formatCurrency(value) {
+        return value.toLocaleString('vi-VN') + ' VND';
+    }
+
     function updateCartItemQuantity(itemId, quantity) {
         fetch('/user/cart/update', {
             method: 'POST',
@@ -48,21 +52,16 @@ document.addEventListener('DOMContentLoaded', function () {
                 const totalPriceCell = row.querySelector('td:nth-child(5)');
                 const totalPriceElement = document.querySelector('.total-price .price');
 
-                function convertPriceStringToFloat(priceString) {
-                    let cleanedPrice = priceString.trim().replace(/[.]+/g, '').replace('VND', '');
-                    return parseFloat(cleanedPrice);
-                }
-
                 if (priceCell) {
-                    priceCell.textContent = convertPriceStringToFloat(data.data.item.price_formatted).toLocaleString();
+                    priceCell.textContent = formatCurrency(data.data.item.price_formatted);
                 }
 
                 if (totalPriceCell) {
-                    totalPriceCell.textContent = convertPriceStringToFloat(data.data.total).toLocaleString();
+                    totalPriceCell.textContent = formatCurrency(data.data.total);
                 }
 
                 if (totalPriceElement) {
-                    totalPriceElement.textContent = convertPriceStringToFloat(data.data.cart_total).toLocaleString();
+                    totalPriceElement.textContent = formatCurrency(data.data.cart_total);
                 }
 
             } else {
@@ -89,6 +88,14 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 const row = document.querySelector(`.btn-delete[data-item-id="${itemId}"]`).parentNode.parentNode;
                 row.parentNode.removeChild(row);
+                updateTotalPrice();
+                checkCartItems();
+
+                const cartTableBody = document.querySelector('.cart-detail tbody');
+                if (cartTableBody.children.length === 0) {
+                    cartTableBody.innerHTML = '<tr><td colspan="6">Giỏ hàng của bạn trống.</td></tr>';
+                    updateTotalPrice(0);
+                }
             } else {
                 alert('Có lỗi xảy ra khi xóa sản phẩm. Vui lòng thử lại.');
             }
@@ -112,6 +119,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (data.success) {
                 const cartTableBody = document.querySelector('.cart-detail tbody');
                 cartTableBody.innerHTML = '<tr><td colspan="6">Giỏ hàng của bạn trống.</td></tr>';
+                updateTotalPrice(0); 
+                checkCartItems();
             } else {
                 alert('Có lỗi xảy ra khi xóa tất cả sản phẩm. Vui lòng thử lại.');
             }
@@ -120,6 +129,25 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Error:', error);
             alert('Có lỗi xảy ra khi xóa tất cả sản phẩm. Vui lòng thử lại.');
         });
+    }
+
+    function updateTotalPrice(newTotal = null) {
+        const totalPriceElement = document.querySelector('.total-price .price');
+        if (totalPriceElement) {
+            if (newTotal !== null) {
+                totalPriceElement.textContent = formatCurrency(newTotal);
+            } else {
+                let total = 0;
+                document.querySelectorAll('.cart-detail tbody tr').forEach(row => {
+                    const itemTotalCell = row.querySelector('td:nth-child(5)');
+                    if (itemTotalCell) {
+                        const itemTotal = parseFloat(itemTotalCell.textContent.replace(/[^\d]/g, ''));
+                        total += isNaN(itemTotal) ? 0 : itemTotal;
+                    }
+                });
+                totalPriceElement.textContent = formatCurrency(total);
+            }
+        }
     }
 
     const payButton = document.querySelector('.pay');

@@ -19,9 +19,9 @@ class ProductRepository extends BaseRepository
         return parent::paginate($page, self::PER_PAGE);
     }
 
-    public function getProductsByCategory($categoryId, $perPage = 8)
+    public function getProductsByCategory($categoryId, $perPage = 8, $page = 1)
     {
-        return $this->model->where('category_id', $categoryId)->paginate($perPage);
+        return $this->model->where('category_id', $categoryId)->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function getHotProductsByCategory($categoryId)

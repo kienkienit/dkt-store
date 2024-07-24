@@ -6,7 +6,7 @@ use App\Models\News;
 
 class NewsRepository extends BaseRepository
 {
-    const PER_PAGE = 5;
+    const PER_PAGE = 6;
 
     public function __construct(News $news)
     {
