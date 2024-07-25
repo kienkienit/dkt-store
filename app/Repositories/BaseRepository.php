@@ -40,8 +40,6 @@ abstract class BaseRepository
 
     public function paginate($page, $perPage)
     {
-        return $this->model
-                    ->orderBy('created_at', 'desc')
-                    ->paginate($perPage, ['*'], 'page', $page);
+        return $this->model->orderBy('created_at', 'desc')->paginate($perPage, ['*'], 'page', $page);
     }
 }

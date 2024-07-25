@@ -15,9 +15,7 @@ class ProductVariantRepository extends BaseRepository
 
     public function getMinPriceByProductId($productId)
     {
-        return $this->model
-                    ->where('product_id', $productId)
-                    ->min('price');
+        return $this->model->where('product_id', $productId)->min('price');
     }
 
     public function paginate($productId, $page)

@@ -123,7 +123,3 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/orders/{year}', [StatisticsController::class, 'getOrdersByMonth'])->name('admin.statistics.orders');
     });
 });
-
-// Route::get('/admin-login', function () {
-//     return view('admin.admin_login');
-// });

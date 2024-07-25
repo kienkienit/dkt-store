@@ -27,4 +27,21 @@ class RegisterUserRequest extends FormRequest
             'password' => 'required|string|min:8',
         ];
     }
+
+    /**
+     * Get custom messages for validator errors.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'username.required' => 'The username is required.',
+            'username.unique' => 'This username is already taken.',
+            'email.required' => 'The email address is required.',
+            'email.unique' => 'This email address is already registered.',
+            'password.required' => 'The password is required.',
+            'password.min' => 'The password must be at least 8 characters.',
+        ];
+    }
 }

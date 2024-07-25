@@ -10,6 +10,7 @@
             </button>
         </div>
     </div>
+    <div class="line col-12 mb-3"></div>
     <div class="middle-news-container" id="news-list">
         <div class="news-item">
             @foreach($news as $newsItem)

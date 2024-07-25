@@ -7,7 +7,7 @@
         <span>>></span>
         <p>Đăng nhập tài khoản</p>
     </div>
-    <div class="login-page">
+    <div class="container login-page">
         <div class="login-part">
             <h3 class="login-title">Đăng nhập tài khoản</h3>
             @if ($errors->any())

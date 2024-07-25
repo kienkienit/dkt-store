@@ -20,8 +20,6 @@ class NewsRepository extends BaseRepository
 
     public function paginate($page, $perPage = self::PER_PAGE)
     {
-        return $this->model
-                    ->orderBy('published_date', 'desc')
-                    ->paginate($perPage, ['*'], 'page', $page);
+        return $this->model->orderBy('published_date', 'desc')->paginate($perPage, ['*'], 'page', $page);
     }
 }

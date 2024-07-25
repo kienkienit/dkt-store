@@ -20,30 +20,26 @@ class ProductRepository extends BaseRepository
 
     public function getProductsByCategory($categoryId, $perPage = 8, $page = 1)
     {
-        return $this->model
-                    ->where('category_id', $categoryId)
-                    ->paginate($perPage, ['*'], 'page', $page);
+        return $this->model->where('category_id', $categoryId)->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function getHotProductsByCategory($categoryId)
     {
-        return $this->model
-                    ->where('category_id', $categoryId)
-                    ->orderBy('created_at', 'desc')->get();
+        return $this->model->where('category_id', $categoryId)->orderBy('created_at', 'desc')->get();
     }
 
-    public function filterProducts($categoryId = null, $productName = null, $page = 1, $perPage = self::PER_PAGE)
+    public function filterProducts($data, $perPage = self::PER_PAGE)
     {
         $query = $this->model;
-
-        if ($categoryId) {
-            $query = $query->where('category_id', $categoryId);
+        
+        if ($data['category_id']) {
+            $query = $query->where('category_id', $data['category_id']);
         }
 
-        if ($productName) {
-            $query = $query->where('name', 'like', '%' . $productName . '%');
+        if ($data['product_name']) {
+            $query = $query->where('name', 'like', '%' . $data['product_name']);
         }
 
-        return $query->paginate($perPage, ['*'], 'page', $page);
+        return $query->paginate($perPage, ['*'], 'page', $data['page']);
     }
 }

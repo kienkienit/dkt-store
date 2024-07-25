@@ -19,17 +19,13 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $inputs = $request->only([
-            'category_id', 
-            'product_name', 
-            'page'
-        ]);
-
-        $inputs['category_id'] = $inputs['category_id'] ?? null;
-        $inputs['product_name'] = $inputs['product_name'] ?? null;
-        $inputs['page'] = $inputs['page'] ?? 1;
-
-        $products = $this->productService->filterProducts(...array_values($inputs));
+        $inputs = array_merge([
+            'category_id' => null,
+            'product_name' => null,
+            'page' => 1,
+        ], $request->only('category_id', 'product_name', 'page'));
+        
+        $products = $this->productService->filterProducts($inputs);
         $pagination = $products->toArray();
 
         if ($request->ajax()) {

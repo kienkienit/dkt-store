@@ -10,6 +10,15 @@
     <div class="container register-page">
         <div class="register-part">
             <h3 class="register-title">Đăng ký tài khoản</h3>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <form id="register-form" method="POST" action="{{ route('register') }}">
                 @csrf
                 <div class="form-group">

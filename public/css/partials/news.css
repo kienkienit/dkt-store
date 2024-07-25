@@ -34,8 +34,20 @@
 }
 .right-header-news-container button {
     width: 30px;
-    border: none;
+    border: 1px solid #77ca64;
+    background-color: white;
 }
 .right-header-news-container button img {
     width: 75%;
+}
+.right-header-news-container button:focus,
+.right-header-news-container button:hover {
+    background-color: #77ca64;
+    outline: none;
+}
+.left-header-news-container {
+    font-size: 20px;
+}
+.posted-time {
+    font-size: 14px;
 }

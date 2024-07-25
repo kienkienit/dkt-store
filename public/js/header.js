@@ -23,6 +23,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const navbarToggler = document.querySelector('.navbar-toggler');
     const navbarMenu = document.querySelector('.navbar-menu');
+    const navbarItems = document.querySelectorAll('.navbar-item a');
+    
+    navbarItems.forEach(item => {
+        item.addEventListener('click', function (event) {
+            navbarItems.forEach(navItem => {
+                navItem.parentElement.classList.remove('active');
+            });
+            this.parentElement.classList.add('active');
+        });
+    });
     
     navbarToggler.addEventListener('click', function () {
         navbarMenu.classList.toggle('active');

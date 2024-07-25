@@ -14,9 +14,7 @@ class OrderDetailRepository extends BaseRepository
 
     public function findByOrderId($orderId)
     {
-        return $this->model
-                    ->where('order_id', $orderId)
-                    ->get();
+        return $this->model->where('order_id', $orderId)->get();
     }
 
     public function getBestSellers($limit = 10)

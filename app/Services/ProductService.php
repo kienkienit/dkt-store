@@ -56,8 +56,8 @@ class ProductService
         return $this->productRepository->paginate($page);
     }
 
-    public function filterProducts($categoryId = null, $productName = null, $page = 1)
+    public function filterProducts($data)
     {
-        return $this->productRepository->filterProducts($categoryId, $productName, $page);
+        return $this->productRepository->filterProducts($data);
     }
 }

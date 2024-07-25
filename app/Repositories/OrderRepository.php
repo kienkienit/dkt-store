@@ -16,9 +16,7 @@ class OrderRepository extends BaseRepository
 
     public function paginate($page, $perPage = self::PER_PAGE)
     {
-        return $this->model
-                    ->orderBy('order_date', 'desc')
-                    ->paginate($perPage, ['*'], 'page', $page);
+        return $this->model->orderBy('order_date', 'desc')->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function getMonthlyRevenue($year)

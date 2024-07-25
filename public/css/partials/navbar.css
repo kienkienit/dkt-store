@@ -11,7 +11,7 @@
     justify-content: center;
 }
 .navbar-item {
-    margin: 0 10px;
+    margin: 0;
     position: relative;
 }
 .navbar-item a {
@@ -20,6 +20,7 @@
     padding: 10px 20px;
     display: block;
 }
+.navbar-item.active a,
 .navbar-item a:hover {
     background-color: #77ca64;
 }

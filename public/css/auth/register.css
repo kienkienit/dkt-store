@@ -37,10 +37,13 @@
     background-color: #77ca64;
     border: 1px solid #77ca64;
 }
+.btn-register:active,
+.btn-register:focus,
 .btn-register:hover {
-    background-color: white;
-    color: #77ca64;
-    border: 1px solid #77ca64;
+    background-color: white !important;
+    color: #77ca64 !important;
+    border: 1px solid #77ca64 !important;
+    box-shadow: none;
 }
 .line {
     height: 2px;
@@ -98,10 +101,13 @@
     border: 1px solid white;
     width: 50%;
 }
+.btn-login:active,
+.btn-login:focus,
 .btn-login:hover {
-    background-color: #77ca64;
-    border: 1px solid #343a40;
-    color: #343a40;
+    background-color: #77ca64 !important;
+    border: 1px solid #343a40 !important;
+    color: #343a40 !important;
+    box-shadow: none;
 }
 .go-home {
     margin-top: 20px;
@@ -117,6 +123,7 @@
     color: #77ca64;
     display: inline-block;
 }
+
 @media (max-width: 992px) {
     .content-container {
         margin: 0 30px;

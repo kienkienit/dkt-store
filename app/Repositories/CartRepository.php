@@ -44,10 +44,7 @@ class CartRepository extends BaseRepository
 
     public function getCartByUserId($userId)
     {
-        return $this->model
-                    ->with('items')
-                    ->where('user_id', $userId)
-                    ->first();
+        return $this->model->with('items')->where('user_id', $userId)->first();
     }
 
     public function updateCartItemQuantity($itemId, $quantity)
@@ -93,9 +90,6 @@ class CartRepository extends BaseRepository
 
     public function getUserCart($userId)
     {
-        return $this->model
-                    ->with('items.product', 'items.variant')
-                    ->where('user_id', $userId)
-                    ->first();
+        return $this->model->with('items.product', 'items.variant')->where('user_id', $userId)->first();
     }
 }
