@@ -12,8 +12,11 @@ class HomeController extends Controller
     protected CategoryService $categoryService;
     protected NewsService $newsService;
 
-    public function __construct(ProductService $productService, CategoryService $categoryService, NewsService $newsService) 
-    {
+    public function __construct(
+        ProductService $productService, 
+        CategoryService $categoryService, 
+        NewsService $newsService
+    ) {
         $this->productService = $productService;
         $this->categoryService = $categoryService;
         $this->newsService = $newsService;

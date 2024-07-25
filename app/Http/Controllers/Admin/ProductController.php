@@ -19,9 +19,15 @@ class ProductController extends Controller
 
     public function index(Request $request)
     {
-        $categoryId = $request->input('category_id');
-        $productName = $request->input('product_name');
-        $page = $request->input('page', 1);
+        $inputs = $request->only([
+            'category_id', 
+            'product_name', 
+            'page'
+        ]);
+
+        $categoryId = $inputs['category_id'] ?? null;
+        $productName = $inputs['product_name'] ?? null;
+        $page = $inputs['page'] ?? 1;
 
         $products = $this->productService->filterProducts($categoryId, $productName, $page);
         $pagination = $products->toArray();

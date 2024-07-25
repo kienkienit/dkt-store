@@ -19,13 +19,21 @@ class OrderController extends Controller
     
     public function index(Request $request)
     {
+        $inputs = $request->only([
+            'status', 
+            'order_code', 
+            'start_date', 
+            'end_date', 
+            'page'
+        ]);
+        
         $filters = [
-            'status' => $request->input('status', 'all'),
-            'order_code' => $request->input('order_code'),
-            'start_date' => $request->input('start_date', null),
-            'end_date' => $request->input('end_date', null)
+            'status' => $inputs['status'] ?? 'all',
+            'order_code' => $inputs['order_code'] ?? null,
+            'start_date' => $inputs['start_date'] ?? null,
+            'end_date' => $inputs['end_date'] ?? null
         ];
-        $page = $request->input('page', 1);
+        $page = $inputs['page'] ?? 1;
 
         $orders = $this->orderService->filterOrders($page, $filters);
         $orderStatuses = OrderStatus::cases();
