@@ -92,11 +92,23 @@
     cursor: pointer;
     border-radius: 5px;
 }
+.cart-button > .remove-all:active,
+.cart-button > .remove-all:focus,
 .cart-button > .remove-all:hover {
-    background-color: #ff4d4d;
+    background-color: #ff4d4d !important;
+    box-shadow: none !important;
 }
-.cart-button > .payer {
-    background-color: #77ca64;
+.cart-button > .pay:active,
+.cart-button > .pay:focus,
+.cart-button > .pay:hover {
+    background-color: #77ca64 !important;
+    box-shadow: none !important;
+}
+.btn-delete:active,
+.btn-delete:focus,
+.btn-delete:hover {
+    background-color: #ff4d4d !important;
+    box-shadow: none !important;
 }
 
 @media (max-width: 992px) {

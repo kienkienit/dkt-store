@@ -25,6 +25,26 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
+    // document.querySelectorAll('.btn-quantity-increase').forEach(button => {
+    //     button.addEventListener('click', function () {
+    //         const input = this.previousElementSibling;
+    //         const itemId = this.dataset.itemId;
+    //         let quantity = parseInt(input.value, 10) + 1;
+    //         input.value = quantity;
+    //         updateCartItemQuantity(itemId, quantity);
+    //     });
+    // });
+
+    // document.querySelectorAll('.btn-quantity-decrease').forEach(button => {
+    //     button.addEventListener('click', function () {
+    //         const input = this.nextElementSibling;
+    //         const itemId = this.dataset.itemId;
+    //         let quantity = Math.max(1, parseInt(input.value, 10) - 1);
+    //         input.value = quantity;
+    //         updateCartItemQuantity(itemId, quantity);
+    //     });
+    // });
+
     function formatCurrency(value) {
         return value.toLocaleString('vi-VN') + ' VND';
     }

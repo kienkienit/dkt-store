@@ -26,10 +26,20 @@
 }
 .right-header-news-sidebar button{
     width: 30px;
-    border: none;
+    border: 1px solid #77ca64;
+    background-color: white;
 }
-.right-header-news-sidebar button img{
-    width: 75%;
+.right-header-news-sidebar button img {
+    width: 50%;
+}
+.right-header-news-sidebar button:focus,
+.right-header-news-sidebar button:hover {
+    background-color: #77ca64;
+    outline: none;
+}
+.line {
+    background-color: #77ca64;
+    height: 2px;
 }
 
 @media (max-width: 992px) {

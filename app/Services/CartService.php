@@ -46,9 +46,4 @@ class CartService
     {
         return $this->cartRepository->deleteAllCartItems($userId);
     }
-
-    public function getUserCart($userId)
-    {
-        return $this->cartRepository->getUserCart($userId);
-    }
 }

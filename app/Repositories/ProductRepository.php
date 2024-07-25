@@ -20,12 +20,16 @@ class ProductRepository extends BaseRepository
 
     public function getProductsByCategory($categoryId, $perPage = 8, $page = 1)
     {
-        return $this->model->where('category_id', $categoryId)->paginate($perPage, ['*'], 'page', $page);
+        return $this->model
+                    ->where('category_id', $categoryId)
+                    ->paginate($perPage, ['*'], 'page', $page);
     }
 
     public function getHotProductsByCategory($categoryId)
     {
-        return $this->model->where('category_id', $categoryId)->orderBy('created_at', 'desc')->get();
+        return $this->model
+                    ->where('category_id', $categoryId)
+                    ->orderBy('created_at', 'desc')->get();
     }
 
     public function filterProducts($categoryId = null, $productName = null, $page = 1, $perPage = self::PER_PAGE)

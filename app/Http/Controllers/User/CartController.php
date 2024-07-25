@@ -74,7 +74,23 @@ class CartController extends Controller
         $user = Auth::user();
         $cart = $this->cartService->getCartByUserId($user->id);
         $cart->load('items.product', 'items.variant');
+
+        if ($cart->items->isEmpty()) {
+            return redirect()->route('cart.show')->withErrors(['Giỏ hàng của bạn trống. Vui lòng thêm sản phẩm trước khi thanh toán.']);
+        }
+        
         return view('pages.payment', compact('cart'));
+    }
+
+    public function getCartItemCount()
+    {
+        $user = Auth::user();
+        $count = 0;
+        if ($user) {
+            $cart = $this->cartService->getCartByUserId($user->id);
+            $count = $cart->items->sum('quantity');
+        }
+        return response()->json(['count' => $count]);
     }
 }
 

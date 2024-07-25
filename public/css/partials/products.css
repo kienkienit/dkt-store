@@ -79,10 +79,13 @@
     -ms-border-radius: 20px;
     -o-border-radius: 20px;
 }
+.add-to-cart:active,
+.add-to-cart:focus,
 .add-to-cart:hover {
-    background-color: #77ca64;
+    background-color: #77ca64 !important;
     color: white;
-    border: 1px solid #77ca64;
+    border: 1px solid #77ca64 !important;
+    box-shadow: 0 0 0 .1rem #77ca64 !important;
 }
 .pagination {
     display: flex;

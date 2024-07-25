@@ -79,4 +79,5 @@
     </div>
 </header>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>window.isUserLoggedIn = {{ Auth::check() ? 'true' : 'false' }};</script>
 <script src="{{ asset('js/header.js') }}"></script>

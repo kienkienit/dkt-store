@@ -20,10 +20,11 @@ class CartRepository extends BaseRepository
     {
         $cart = $this->model->firstOrCreate(['user_id' => $userId]);
 
-        $cartItem = $this->cartItem->where('cart_id', $cart->id)
-            ->where('product_id', $data['product_id'])
-            ->where('variant_id', $data['variant_id'])
-            ->first();
+        $cartItem = $this->cartItem
+                         ->where('cart_id', $cart->id)
+                         ->where('product_id', $data['product_id'])
+                         ->where('variant_id', $data['variant_id'])
+                         ->first();
 
         if ($cartItem) {
             $cartItem->quantity += $data['quantity'];
@@ -43,7 +44,10 @@ class CartRepository extends BaseRepository
 
     public function getCartByUserId($userId)
     {
-        return $this->model->with('items')->where('user_id', $userId)->first();
+        return $this->model
+                    ->with('items')
+                    ->where('user_id', $userId)
+                    ->first();
     }
 
     public function updateCartItemQuantity($itemId, $quantity)
@@ -89,6 +93,9 @@ class CartRepository extends BaseRepository
 
     public function getUserCart($userId)
     {
-        return $this->model->with('items.product', 'items.variant')->where('user_id', $userId)->first();
+        return $this->model
+                    ->with('items.product', 'items.variant')
+                    ->where('user_id', $userId)
+                    ->first();
     }
 }

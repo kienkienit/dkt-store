@@ -36,4 +36,22 @@ document.addEventListener('DOMContentLoaded', function () {
             navbarMenu.classList.remove('active');
         }
     });
+
+    function updateCartCount() {
+        fetch('/user/cart/count')
+            .then(response => response.json())
+            .then(data => {
+                const cartCountElement = document.querySelector('.cart-count');
+                if (cartCountElement) {
+                    cartCountElement.textContent = data.count;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
+
+    if (window.isUserLoggedIn) {
+        updateCartCount();
+    }
 });

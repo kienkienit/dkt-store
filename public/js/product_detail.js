@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 setTimeout(() => {
                     cartAlert.style.display = 'none';
                 }, 3000);
+                updateCartCount();
             } else {
                 alert('Có lỗi xảy ra khi thêm vào giỏ hàng. Vui lòng thử lại.');
             }
@@ -128,6 +129,20 @@ document.addEventListener('DOMContentLoaded', function() {
             alert('Có lỗi xảy ra khi thêm vào giỏ hàng. Vui lòng thử lại.');
         });
     });
+
+    function updateCartCount() {
+        fetch('/user/cart/count')
+            .then(response => response.json())
+            .then(data => {
+                const cartCountElement = document.querySelector('.cart-count');
+                if (cartCountElement) {
+                    cartCountElement.textContent = data.count;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    }
 
     selectFirstButton(document.querySelectorAll('.color-button'));
     selectFirstButton(document.querySelectorAll('.storage-button'));

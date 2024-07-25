@@ -30,19 +30,18 @@ abstract class BaseRepository
 
     public function update($id, array $data)
     {
-        $model = $this->findById($id);
-        $model->update($data);
-        return $model;
+        return $this->findById($id)->update($data);
     }
 
     public function delete($id)
     {
-        $model = $this->findById($id);
-        return $model->delete();
+        return $this->findById($id)->delete();
     }
 
     public function paginate($page, $perPage)
     {
-        return $this->model->orderBy('created_at', 'desc')->paginate($perPage, ['*'], 'page', $page);
+        return $this->model
+                    ->orderBy('created_at', 'desc')
+                    ->paginate($perPage, ['*'], 'page', $page);
     }
 }

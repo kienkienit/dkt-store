@@ -10,6 +10,7 @@
             </button>
         </div>
     </div>
+    <div class="line col-12 mb-2"></div>
     <div class="middle-news-sidebar" id="news-sidebar-content">
         @foreach($news as $newsItem)
             <img src="{{ $newsItem->image }}" alt="Tin tức">

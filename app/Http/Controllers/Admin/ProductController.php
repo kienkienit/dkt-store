@@ -25,11 +25,11 @@ class ProductController extends Controller
             'page'
         ]);
 
-        $categoryId = $inputs['category_id'] ?? null;
-        $productName = $inputs['product_name'] ?? null;
-        $page = $inputs['page'] ?? 1;
+        $inputs['category_id'] = $inputs['category_id'] ?? null;
+        $inputs['product_name'] = $inputs['product_name'] ?? null;
+        $inputs['page'] = $inputs['page'] ?? 1;
 
-        $products = $this->productService->filterProducts($categoryId, $productName, $page);
+        $products = $this->productService->filterProducts(...array_values($inputs));
         $pagination = $products->toArray();
 
         if ($request->ajax()) {

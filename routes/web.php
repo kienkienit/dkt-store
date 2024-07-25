@@ -71,6 +71,8 @@ Route::prefix('user')->middleware('auth', 'role:user')->group(function () {
         Route::post('update', [CartController::class, 'updateCartItemQuantity'])->name('cart.update');
         Route::delete('delete', [CartController::class, 'deleteCartItem'])->name('cart.delete');
         Route::delete('delete-all', [CartController::class, 'deleteAllCartItems'])->name('cart.deleteAll');
+        Route::get('check', [CartController::class, 'checkCart'])->name('cart.check');
+        Route::get('count', [CartController::class, 'getCartItemCount'])->name('cart.count');
     });
 
     Route::get('/payment', [CartController::class, 'showPaymentPage'])->name('payment.show');
@@ -121,3 +123,7 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/orders/{year}', [StatisticsController::class, 'getOrdersByMonth'])->name('admin.statistics.orders');
     });
 });
+
+// Route::get('/admin-login', function () {
+//     return view('admin.admin_login');
+// });
