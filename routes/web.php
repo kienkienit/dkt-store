@@ -122,4 +122,13 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/revenue/{year}', [StatisticsController::class, 'getRevenueByMonth'])->name('admin.statistics.revenue');
         Route::get('/orders/{year}', [StatisticsController::class, 'getOrdersByMonth'])->name('admin.statistics.orders');
     });
+    Route::post('/logout', function () {
+        Auth::logout();
+        return redirect()->route('loginAdmin');
+    })->name('logoutAdmin');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [LoginController::class, 'showLoginAdminForm'])->name('loginAdmin');
+    Route::post('/', [LoginController::class, 'login']);
 });

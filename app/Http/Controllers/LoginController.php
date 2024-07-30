@@ -37,4 +37,9 @@ class LoginController extends Controller
             'username' => 'The provided credentials do not match our records.',
         ])->withInput();
     }
+
+    public function showLoginAdminForm()
+    {
+        return view('admin.admin_login');
+    }
 }

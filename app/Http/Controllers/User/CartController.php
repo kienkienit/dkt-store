@@ -92,5 +92,15 @@ class CartController extends Controller
         }
         return response()->json(['count' => $count]);
     }
+
+    public function checkCart()
+    {
+        $user = Auth::user();
+        $cart = $this->cartService->getCartByUserId($user->id);
+        if ($cart->items->isEmpty()) {
+            return response()->json(['success' => false, 'message' => 'Giỏ hàng của bạn trống. Vui lòng thêm sản phẩm trước khi thanh toán.']);
+        }
+        return response()->json(['success' => true]);
+    }
 }
 
