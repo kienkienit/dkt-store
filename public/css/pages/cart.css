@@ -1,0 +1,124 @@
+.content-container {
+    margin: 0 15%;
+}
+.go-home {
+    margin-top: 20px;
+}
+.go-home a{
+    color: #343a40;
+}
+.go-home a:hover {
+    color: #77ca64;
+    text-decoration: none;
+}
+.go-home p {
+    color: #77ca64;
+    display: inline-block;
+}
+.cart-title {
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+}
+.line {
+    height: 2px;
+    background-color: #c9c7c7;
+    margin: 30px 0;
+}
+.cart-detail {
+    width: 100%;
+    overflow-x: auto;
+}
+.cart-detail table {
+    width: 100%;
+    border-collapse: collapse;
+}
+.cart-detail th, .cart-detail td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+    vertical-align: middle;
+}
+.cart-detail th {
+    background-color: #f8f8f8;
+}
+.cart-detail img {
+    max-width: 100px;
+    height: auto;
+}
+.cart-detail input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+}
+.cart-detail .btn-delete {
+    background-color: #ff4d4d;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.cart-detail .btn-delete:hover {
+    background-color: #ff1a1a;
+}
+.total-price {
+    margin: 30px 0;
+    display: flex;
+    justify-content: flex-end;
+}
+.total-price > * {
+    margin-left: 30px;
+    font-size: 20px;
+}
+.total-price > .price {
+    color: #77ca64;
+}
+.cart-button {
+    display: flex;
+    justify-content: space-between;
+}
+.cart-button > .remove-all {
+    background-color: #ff4d4d;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.cart-button > .pay {
+    background-color: #77ca64;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+.cart-button > .remove-all:active,
+.cart-button > .remove-all:focus,
+.cart-button > .remove-all:hover {
+    background-color: #ff4d4d !important;
+    box-shadow: none !important;
+}
+.cart-button > .pay:active,
+.cart-button > .pay:focus,
+.cart-button > .pay:hover {
+    background-color: #77ca64 !important;
+    box-shadow: none !important;
+}
+.btn-delete:active,
+.btn-delete:focus,
+.btn-delete:hover {
+    background-color: #ff4d4d !important;
+    box-shadow: none !important;
+}
+
+@media (max-width: 992px) {
+    .content-container {
+        margin: 0 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .content-container {
+        margin: 0 10px;
+    }
+}

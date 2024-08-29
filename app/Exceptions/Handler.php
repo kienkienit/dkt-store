@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Enums\HttpStatus;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -26,5 +27,17 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        if ($request->expectsJson()) {
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], HttpStatus::INTERNAL_SERVER_ERROR->value);
+        }
+
+        return parent::render($request, $exception);
     }
 }
